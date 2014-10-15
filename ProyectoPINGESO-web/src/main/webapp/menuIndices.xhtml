@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Índices</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form> 
+                <p:layout fullPage="true">
+                    <p:layoutUnit position="north" style="min-height: 70px">
+                        <img src="Recursos/logoGo.png" width="30" height="30" alt="logo-go"/>
+                        <div align="center">
+                            <p:outputLabel value="Generator Quality Indices" />
+                        </div>
+                    </p:layoutUnit>
+
+
+                    <p:layoutUnit position="west" style="max-width: 250px" header="Menú" >
+                        <p:menu>
+                            <p:menuitem  icon="ui-icon-home" value="Home" url="http://localhost:8080/pingeso-web/faces/menuHome.xhtml" />
+                            <p:menuitem  icon="ui-icon-calculator" value="GO biological indeces" url="http://localhost:8080/pingeso-web/faces/menuIndices.xhtml" />
+                            <p:menuitem  icon="ui-icon-person" value="Users" url="http://localhost:8080/pingeso-web/faces/menuUser.xhtml" />
+                            <p:menuitem  icon="ui-icon-clipboard" value="Genes" url="http://localhost:8080/pingeso-web/faces/menuGenes.xhtml" />
+                            <p:menuitem  icon="ui-icon-help" value="How to use" url="http://localhost:8080/pingeso-web/faces/menuHelp.xhtml"/>
+                        </p:menu>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center" header="Genetic Analysis">
+                        <h:panelGrid columns="2">
+                            <p:inputTextarea addLine="hola" style="width: 180px;height: 200px"/>
+                            <p:commandButton value="Generate" icon="ui-icon-calculator"/>
+                            <p:outputLabel value="Select Indice: " />
+                            <p:selectOneMenu style="width:150px">
+                                <f:selectItem itemLabel="-Index-"/>
+                                <f:selectItem itemLabel="TKB" itemValue="1" itemDisabled="false"/>
+                                <f:selectItem itemLabel="GS2" itemValue="2" itemDisabled="false"/>
+                                <f:selectItem itemLabel="Lin" itemValue="3" itemDisabled="false"/>
+                                <f:selectItem itemLabel="Leacock-Chodorow" itemValue="4" itemDisabled="true"/>
+                                <f:selectItem itemLabel="Resnik" itemValue="5" itemDisabled="true"/>
+                                <f:selectItem itemLabel="Jiang-Conrath" itemValue="6" itemDisabled="true"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Select Specie: " />
+                            <p:selectOneMenu value="" style="width:150px">
+                                <f:selectItem itemLabel="-Species-"/>
+                                <f:selectItem itemLabel="H. Sapiens" itemValue="1" itemDisabled="false"/>
+                                <f:selectItem itemLabel="M. Musculus" itemValue="2" itemDisabled="false"/>
+                                <f:selectItem itemLabel="R. Norvegicus" itemValue="3" itemDisabled="false"/>
+                                <f:selectItem itemLabel="G. Gallus" itemValue="4" itemDisabled="false"/>
+                                <f:selectItem itemLabel="D. Rerio" itemValue="5" itemDisabled="false"/>
+                                <f:selectItem itemLabel="D. Melanogaster" itemValue="6" itemDisabled="false"/>
+                                <f:selectItem itemLabel="C. Elegans" itemValue="7" itemDisabled="false"/>
+                                <f:selectItem itemLabel="D. Discoideum" itemValue="8" itemDisabled="false"/>
+                                <f:selectItem itemLabel="S. Pombe" itemValue="9" itemDisabled="false"/>
+                                <f:selectItem itemLabel="S. Cerevisiae" itemValue="10" itemDisabled="false"/>
+                                <f:selectItem itemLabel="A. Thaliana" itemValue="11" itemDisabled="false"/>
+                                <f:selectItem itemLabel="E. Coli" itemValue="12" itemDisabled="false"/>
+                                <f:selectItem itemLabel="C. Albicans" itemValue="13" itemDisabled="false"/>
+                            </p:selectOneMenu>
+                            
+                            
+                        </h:panelGrid>
+
+                    </p:layoutUnit>
+                    <p:layoutUnit position="south"  style="min-height: 100px; min-width: 700px" >
+                        <div align="center" style="max-height: 150px;background-color: #1e48f6">
+                            <img src="Recursos/logoUsach2.png" width="300" height="85" />
+                        </div>
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form> 
+        </h:body>
+    </f:view>
+</html>
+
