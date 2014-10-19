@@ -1,5 +1,3 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
@@ -9,10 +7,11 @@
         <title>Journaldev Tutorial</title>
     </h:head>
     <h:body>
-        <h:form enctype="multipart/form-data">
-                <p:fileUpload value="#{fileUploadManagedBean.file}"  mode="simple"></p:fileUpload>
-                <p:separator/>
-                <h:commandButton value="Dummy Action" action="#{fileUploadManagedBean.dummyAction}"></h:commandButton>
+
+        <h:form enctype="multipart/form-data" style="width:500px">
+                <p:growl id="msg"></p:growl>
+                <p:fileUpload value="#{fileUploadManagedBean.file}" mode="advanced"
+                                fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" update="msg"></p:fileUpload>
         </h:form>
     </h:body>
 </html>
