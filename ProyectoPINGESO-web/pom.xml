@@ -20,11 +20,17 @@
     </properties>
     
     <dependencies>
+        
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>5.1</version>
         </dependency>
+        <dependency>  
+            <groupId>org.primefaces.themes</groupId>  
+            <artifactId>humanity</artifactId>  
+            <version>1.0.10</version>  
+        </dependency> 
           
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -57,11 +63,6 @@
             <version>2.2.4</version>
         </dependency>
         <!-- Primefaces Version 5 -->
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>5.0</version>
-        </dependency>
         <!-- JSP Library -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>

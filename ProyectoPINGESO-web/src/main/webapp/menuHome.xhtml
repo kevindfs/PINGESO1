@@ -9,28 +9,47 @@
 
     <f:view contentType="text/html">
         <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Home</title>
-            </f:facet>
+            <title>Home</title>
         </h:head>
 
         <h:body>
             <h:form> 
                 <p:layout fullPage="true">
-                    <p:layoutUnit position="north" style="min-height: 70px">
-                        <img src="Recursos/logoGo.png" width="30" height="30" alt="logo-go"/>
-                        <div align="center">
-                            <p:outputLabel value="Generator Quality Indices" />
-                        </div>
+                    <p:layoutUnit position="north"  style="min-height: 102px; min-width: 700px" >
+                        <div class="ui-grid">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <p:panel style="background: #fdb146; min-height: 80px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col">
+                                                <p:graphicImage value="Recursos/GO.png" width="30" height="30" style="margin-left: 20px"/>
+                                                <p:outputLabel value="Based on Gene Ontology" style="color: #1f61b2;margin-left: 15px"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
+
+                                <div class="ui-grid-col-10">
+                                    <p:panel style="background: #1f61b2; min-height: 80px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-10">
+                                                <p:graphicImage value="Recursos/titulo.png" width="400"  style="margin-top: 10px;margin-left: 20px"/>
+                                            </div>
+                                            <div class="ui-grid-col-2">
+                                                <p:graphicImage value="Recursos/adn.png" width="70" height="55" style="margin-left: 50px"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
+                            </div>
+                        </div> 
                     </p:layoutUnit>
 
 
-                    <p:layoutUnit position="west" style="max-width: 250px" header="Menú" >
-                        <p:menu>
+                    <p:layoutUnit position="west" style="max-width: 250px" header="Menu" >
+                        <p:menu style="width: 230px">
                             <p:menuitem  icon="ui-icon-home" value="Home" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
-                            <p:menuitem  icon="ui-icon-calculator" value="GO biological indeces" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuIndices.xhtml" />
-                            <p:menuitem  icon="ui-icon-person" value="Users" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuUser.xhtml" />
+                            <p:menuitem  icon="ui-icon-calculator" value="GO biological indece" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuIndices.xhtml" />
                             <p:menuitem  icon="ui-icon-clipboard" value="Genes" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuGenes.xhtml" />
                             <p:menuitem  icon="ui-icon-help" value="How to use" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHelp.xhtml"/>
                         </p:menu>
@@ -42,9 +61,43 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="south"  style="min-height: 100px; min-width: 700px" >
-                        <div align="center" style="max-height: 150px;background-color: #1e48f6">
-                            <img src="Recursos/logoUsach2.png" width="300" height="85" />
-                        </div>
+                        <div class="ui-grid">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-8">
+                                    <p:panel style="background: #fdb146; min-height: 80px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-6">
+                                                <p:graphicImage value="Recursos/appsolution.png" width="200" height="50" style="margin-left: 20px"/>
+                                            </div>
+                                            <div class="ui-grid-col-10">
+                                                <p:outputLabel value="Contact:" style="color: #1f61b2"/>
+                                                <br/>
+                                                <p:outputLabel value="- E-mail: appsolutions@gmail.com" style="color: #1f61b2;margin-left: 15px"/>
+                                                <br/>
+                                                <p:outputLabel value="- Phone: 09-78095193" style="color: #1f61b2;margin-left: 15px"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
+
+                                <div class="ui-grid-col-10">
+                                    <p:panel style="background: #1f61b2; min-height: 80px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-10">
+                                                <p:outputLabel value=" Go to:" style="color: #fdb146"/>
+                                                <br/>
+                                                <p:link value="- University of Santiago of Chile" href="http://www.usach.cl" style="color: #fdb146; margin-left: 15px"/>
+                                                <br/>
+                                                <p:link value="- Department of Computer Engineering" href="http://www.informatica.usach.cl" style="color: #fdb146; margin-left: 15px"/>
+                                            </div>
+                                            <div class="ui-grid-col-8">
+                                                <p:graphicImage value="Recursos/logoUsach2.png" width="250" height="50" style="margin-left: 10px"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
+                            </div>
+                        </div>    
                     </p:layoutUnit>
                 </p:layout>
             </h:form> 
