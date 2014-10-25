@@ -1,64 +1,128 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+
+
 
     <f:view contentType="text/html">
         <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
-            </f:facet>
+            <title>Home</title>
         </h:head>
 
         <h:body>
+            <h:form> 
+                <p:layout fullPage="true">
+                    <p:layoutUnit position="north"  style="min-height: 102px; min-width: 700px" >
+                        <div class="ui-grid">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <p:panel style="background: #fdb146; min-height: 80px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col">
+                                                <p:graphicImage value="Recursos/GO.png" width="30" height="30" style="margin-left: 20px"/>
+                                                <p:outputLabel value="Based on Gene Ontology" style="color: #1f61b2;margin-left: 15px"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
 
-            <p:layout fullPage="true">
+                                <div class="ui-grid-col-10">
+                                    <p:panel style="background: #1f61b2; min-height: 80px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-10">
+                                                <p:graphicImage value="Recursos/titulo.png" width="400"  style="margin-top: 10px;margin-left: 20px"/>
+                                            </div>
+                                            <div class="ui-grid-col-2">
+                                                <p:graphicImage value="Recursos/adn.png" width="70" height="55" style="margin-left: 50px"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
+                            </div>
+                        </div> 
+                    </p:layoutUnit>
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
-                </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
+                    <p:layoutUnit position="west" style="min-width: 300px" header="Menu" >
+                        <p:menu toggleable="true" style="width: 285px">
+                            <p:menuitem  icon="ui-icon-home" value="Home" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
+                            <p:submenu  label="GO biological indece">
+                                <p:menuitem disabled="false" value="TBK" url="http://localhost:8080/ProyectoPINGESO-web/faces/TBK.xhtml" />
+                                <p:menuitem disabled="true" value="GS2" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
+                                <p:menuitem disabled="false" value="Wu-Palmer" url="http://localhost:8080/ProyectoPINGESO-web/faces/WuPalmer.xhtml" />
+                                <p:menuitem disabled="true" value="Lin" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
+                                <p:menuitem disabled="true" value="Leacock-Chodorow" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
+                                <p:menuitem disabled="true" value="Resnik" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
+                                <p:menuitem disabled="true" value="Jiang-Conrath" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
+                            </p:submenu>
+                            <p:separator/>
+                        </p:menu>
+                        <p:menu toggleable="true" style="width: 285px">
+                            <p:menuitem  icon="ui-icon-clipboard" value="Genes" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuGenes.xhtml" ></p:menuitem>
+                            <p:menuitem  icon="ui-icon-help" value="How to use" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHelp.xhtml"></p:menuitem>
+                        </p:menu>
+                    </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+                    <p:layoutUnit position="center" header="Welcome 'User'">
+                        <h3>Wu Palmer</h3>
+                        <h:form>
+                            <h:outputText value="D1: "/>
+                            <h:inputText value="#{wuPalmerMB.d1}"></h:inputText><br/>
+                            <h:outputText value="D2: "/>
+                            <h:inputText value="#{wuPalmerMB.d2}"></h:inputText><br/>
+                            <h:outputText value="D3: "/>
+                            <h:inputText value="#{wuPalmerMB.d3}"></h:inputText><br/>
+                            <h:outputText value="Output: " />
+                            <h:inputText id="resultado" value="#{wuPalmerMB.wp}"/>
 
-                        </p:submenu>
+                            <p:commandButton value="Calculate Wu Palmer"  actionListener="#{wuPalmerMB.func_wp()}" update="resultado" />
+                        </h:form>
+                    </p:layoutUnit>
 
-                    </p:menu>
-                </p:layoutUnit>
+                    <p:layoutUnit position="south"  style="min-height: 100px; min-width: 700px" >
+                        <div class="ui-grid">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-8">
+                                    <p:panel style="background: #fdb146; min-height: 80px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-6">
+                                                <p:graphicImage value="Recursos/appsolution.png" width="200" height="50" style="margin-left: 20px"/>
+                                            </div>
+                                            <div class="ui-grid-col-10">
+                                                <p:outputLabel value="Contact:" style="color: #1f61b2"/>
+                                                <br/>
+                                                <p:outputLabel value="- E-mail: appsolutions@gmail.com" style="color: #1f61b2;margin-left: 15px"/>
+                                                <br/>
+                                                <p:outputLabel value="- Phone: 09-78095193" style="color: #1f61b2;margin-left: 15px"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
 
-                <p:layoutUnit position="center">
-                    <h3>Wu Palmer</h3>
-                    <h:form>
-                        <h:outputText value="Ingrese D1: "/>
-                        <h:inputText value="#{wuPalmerMB.d1}"></h:inputText><br/>
-                        <h:outputText value="Ingrese D2: "/>
-                        <h:inputText value="#{wuPalmerMB.d2}"></h:inputText><br/>
-                        <h:outputText value="Ingrese D3: "/>
-                        <h:inputText value="#{wuPalmerMB.d3}"></h:inputText><br/>
-                        <h:outputText value="Salida: " />
-                        <h:inputText id="resultado" value="#{wuPalmerMB.wp}"/>
-                        
-                        <p:commandButton value="Calcular WP"  actionListener="#{wuPalmerMB.func_wp()}" update="resultado" />
-                        
-                    </h:form>
-                </p:layoutUnit>
-
-            </p:layout>
-
+                                <div class="ui-grid-col-10">
+                                    <p:panel style="background: #1f61b2; min-height: 80px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-10">
+                                                <p:outputLabel value=" Go to:" style="color: #fdb146"/>
+                                                <br/>
+                                                <p:link value="- University of Santiago of Chile" href="http://www.usach.cl" style="color: #fdb146; margin-left: 15px"/>
+                                                <br/>
+                                                <p:link value="- Department of Computer Engineering" href="http://www.informatica.usach.cl" style="color: #fdb146; margin-left: 15px"/>
+                                            </div>
+                                            <div class="ui-grid-col-8">
+                                                <p:graphicImage value="Recursos/logoUsach2.png" width="250" height="80" style="margin-left: 10px"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
+                            </div>
+                        </div>    
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form> 
         </h:body>
-
     </f:view>
 </html>
-
