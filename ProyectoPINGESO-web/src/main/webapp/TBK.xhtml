@@ -9,7 +9,7 @@
 
     <f:view contentType="text/html">
         <h:head>
-            <title>Índices</title>
+            <title>TBK</title>
         </h:head>
 
         <h:body>
@@ -65,15 +65,23 @@
                             <p:menuitem  icon="ui-icon-help" value="How to use" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHelp.xhtml"></p:menuitem>
                         </p:menu>
                     </p:layoutUnit>
-                    
-                    <p:layoutUnit position="center" header="Gene Ontology Delivery">
-                        Info sobre genes
-                        <p:lightBox iframe="true" id="lighbox3">
-                            <h:outputLink value="http://geneontology.org" title="PrimeFaces HomePage">
-                                <p:commandButton value="Go to Gene Ontology" icon="ui-icon-arrow"/>
-                            </h:outputLink>
-                        </p:lightBox>
 
+                    <p:layoutUnit position="center" header="Welcome 'User'">
+                        <h3>T.B.K</h3>
+                        <h:form>
+                            <h:outputText value="D1: "/>
+                            <h:inputText value="#{tBKMB.d1}"></h:inputText><br/>
+                            <h:outputText value="D2: "/>
+                            <h:inputText value="#{tBKMB.d2}"></h:inputText><br/>
+                            <h:outputText value="D3: "/>
+                            <h:inputText value="#{tBKMB.d3}"></h:inputText><br/>
+                            <h:outputText value="Lambda: "/>
+                            <h:inputText value="#{tBKMB.lambda}"></h:inputText><br/>
+                            <h:outputText value="Output: " />
+                            <h:inputText id="resultado" value="#{tBKMB.tbk}"/>
+
+                            <p:commandButton value="Calculate T.B.K"  actionListener="#{tBKMB.func_tbk()}" update="resultado" />
+                        </h:form>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="south"  style="min-height: 100px; min-width: 700px" >
@@ -107,7 +115,7 @@
                                                 <p:link value="- Department of Computer Engineering" href="http://www.informatica.usach.cl" style="color: #fdb146; margin-left: 15px"/>
                                             </div>
                                             <div class="ui-grid-col-8">
-                                                <p:graphicImage value="Recursos/logoUsach2.png" width="250" height="50" style="margin-left: 10px"/>
+                                                <p:graphicImage value="Recursos/logoUsach2.png" width="250" height="80" style="margin-left: 10px"/>
                                             </div>
                                         </div>
                                     </p:panel>
@@ -120,7 +128,5 @@
         </h:body>
     </f:view>
 </html>
-
-
 
 
