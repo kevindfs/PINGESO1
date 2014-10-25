@@ -39,14 +39,20 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    <h3>Not Responsive</h3>
-                    <div class="ui-grid">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-6">6</div>
-                            <div class="ui-grid-col-6">6</div>
-                        </div>
-                    </div>    
-                    Welcome to PrimeFaces
+                    <h3>Wu Palmer</h3>
+                    <h:form>
+                        <h:outputText value="Ingrese D1: "/>
+                        <h:inputText value="#{wuPalmerMB.d1}"></h:inputText><br/>
+                        <h:outputText value="Ingrese D2: "/>
+                        <h:inputText value="#{wuPalmerMB.d2}"></h:inputText><br/>
+                        <h:outputText value="Ingrese D3: "/>
+                        <h:inputText value="#{wuPalmerMB.d3}"></h:inputText><br/>
+                        <h:outputText value="Salida: " />
+                        <h:inputText id="resultado" value="#{wuPalmerMB.wp}"/>
+                        
+                        <p:commandButton value="Calcular WP"  actionListener="#{wuPalmerMB.func_wp()}" update="resultado" />
+                        
+                    </h:form>
                 </p:layoutUnit>
 
             </p:layout>
