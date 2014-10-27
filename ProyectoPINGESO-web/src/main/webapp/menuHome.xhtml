@@ -49,7 +49,11 @@
                     <p:layoutUnit position="west" style="min-width: 300px" header="Menu" >
                         <p:menu toggleable="true" style="width: 285px">
                             <p:menuitem  icon="ui-icon-home" value="Home" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
-                            <p:submenu  label="GO biological indece">
+                            <p:menuitem  icon="ui-icon-clipboard" value="Genes" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuGenes.xhtml" ></p:menuitem>
+                            <p:menuitem  icon="ui-icon-help" value="How to use" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHelp.xhtml"></p:menuitem>
+                        
+                            <p:submenu  transient="false" label="GO biological indices">
+                                <p:menuitem disabled="false" value="Upload" url="http://localhost:8080/ProyectoPINGESO-web/faces/readinput.xhtml" />
                                 <p:menuitem disabled="false" value="TBK" url="http://localhost:8080/ProyectoPINGESO-web/faces/TBK.xhtml" />
                                 <p:menuitem disabled="true" value="GS2" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
                                 <p:menuitem disabled="false" value="Wu-Palmer" url="http://localhost:8080/ProyectoPINGESO-web/faces/WuPalmer.xhtml" />
@@ -58,12 +62,8 @@
                                 <p:menuitem disabled="true" value="Resnik" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
                                 <p:menuitem disabled="true" value="Jiang-Conrath" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHome.xhtml" />
                             </p:submenu>
-                            <p:separator/>
                         </p:menu>
-                        <p:menu toggleable="true" style="width: 285px">
-                            <p:menuitem  icon="ui-icon-clipboard" value="Genes" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuGenes.xhtml" ></p:menuitem>
-                            <p:menuitem  icon="ui-icon-help" value="How to use" url="http://localhost:8080/ProyectoPINGESO-web/faces/menuHelp.xhtml"></p:menuitem>
-                        </p:menu>
+                       
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center" header="Welcome 'User'">
