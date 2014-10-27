@@ -11,8 +11,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.primefaces.event.FileUploadEvent;
@@ -22,45 +20,36 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 
-
-
 public class FileUploadManagedBean {
+
     UploadedFile file;
- 
+
     public UploadedFile getFile() {
         return file;
     }
- 
+
     public void setFile(UploadedFile file) {
         this.file = file;
     }
- 
-    public void fileUploadListener(FileUploadEvent e){
+
+    public void fileUploadListener(FileUploadEvent e) {
         // Get uploaded file from the FileUploadEvent
         this.file = e.getFile();
         // Print out the information of the file
-        System.out.println("Uploaded File Name Is :: "+file.getFileName()+" :: Uploaded File Size :: "+file.getSize());
+        System.out.println("Uploaded File Name Is :: " + file.getFileName() + " :: Uploaded File Size :: " + file.getSize());
         System.out.println(obtenerDatos(this.file));
 
         // Add message
-        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(obtenerDatos(this.file)));
-        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("File Uploaded Successfully"));
-        
-        
-        
-        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(obtenerDatos(this.file)));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("File Uploaded Successfully"));
+
     }
-    
-    
 
-       
-    
 //funcion para convertir datos en cadena de strings
-        ArrayList<String> nombreGen = new ArrayList<String>(); 
-        ArrayList<String> numeroGen = new ArrayList<String>(); 
+    ArrayList<String> nombreGen = new ArrayList<String>();
+    ArrayList<String> numeroGen = new ArrayList<String>();
 
-    
-       private String obtenerDatos(UploadedFile archivo){
+    private String obtenerDatos(UploadedFile archivo) {
 
         StringBuilder sb = new StringBuilder();
         String line;
@@ -71,13 +60,12 @@ public class FileUploadManagedBean {
             BufferedReader br = new BufferedReader(new InputStreamReader(input));
 
             while ((line = br.readLine()) != null) {
-                String linea[]=line.split(",");                
-                System.out.println("parte 0: "+linea[0]);
-                System.out.println("parte 1: "+linea[1]);
+                String linea[] = line.split(",");
+                System.out.println("parte 0: " + linea[0]);
+                System.out.println("parte 1: " + linea[1]);
                 nombreGen.add(linea[0]);
                 numeroGen.add(linea[1]);
-                
-                
+
                 sb.append(line + '\n');
             }
             Genes();
@@ -86,16 +74,10 @@ public class FileUploadManagedBean {
         }
         return sb.toString();
     }
-       
-    private void Genes(){
+
+    private void Genes() {
         for (int i = 0; i < nombreGen.size(); i++) {
-            System.out.print("de arreglo de genes: "+nombreGen.get(i)+ " "+numeroGen.get(i));
-            
+            System.out.print("de arreglo de genes: " + nombreGen.get(i) + " " + numeroGen.get(i));
         }
-        
-        
-        
-    }   
-    
-    
+    }
 }
