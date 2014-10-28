@@ -77,16 +77,6 @@
                                                 <p:inputTextarea value="Insert your genes" 
                                                                  style="min-width:150px; min-height: 150px"/>
                                                 <p:commandButton value="Generate" icon="ui-icon-calculator"/>
-
-                                                <h:outputLabel value="Select Index" />
-
-                                                <p:selectCheckboxMenu value="#{checkboxView.selectedCities}" 
-                                                                      label="Index"
-                                                                      filter="true" 
-                                                                      filterMatchMode="startsWith" 
-                                                                      panelStyle="width:250px">
-                                                    <f:selectItems value="#{checkboxView.cities}" />
-                                                </p:selectCheckboxMenu>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <p:growl id="msg"></p:growl>
