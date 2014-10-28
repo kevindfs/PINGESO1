@@ -5,6 +5,7 @@
  */
 package sessionbeans;
 
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +14,8 @@ import javax.ejb.Local;
  */
 @Local
 public interface Neo4JLocal {
+    // Recibe una query en String y retorna un List<String> con la respuesta de la bd
+    List<String> consulta(String _query);
     // Dados los ids de dos nodos, retorna el id del ancestro común mínimo.
     int ancestroComunMinimo(int idNodoUno, int idNodoDos);
 

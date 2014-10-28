@@ -5,7 +5,15 @@
  */
 package sessionbeans;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
+import org.neo4j.cypher.ExecutionEngine;
+import org.neo4j.cypher.ExecutionResult;
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.kernel.impl.util.StringLogger;
 
 /**
  *
@@ -13,6 +21,15 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class Neo4J implements Neo4JLocal {
+    private String dbPath;
+    private GraphDatabaseService graphDataService;
+
+    public Neo4J() {
+    }
+    
+    public Neo4J(String _dbPath) {
+        dbPath = _dbPath;
+    }
 
     @Override
     public int ancestroComunMinimo(int idNodoUno, int idNodoDos) {
@@ -55,5 +72,32 @@ public class Neo4J implements Neo4JLocal {
     @Override
     public int profundidad(int idNodo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<String> consulta(String _query) {
+        List<String> lista = new ArrayList<>();
+        graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
+        
+        ExecutionResult result;
+        Transaction transaction = graphDataService.beginTx();
+        ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
+        
+        try {
+            result = engine.execute(_query);
+            
+            while (result.hasNext()) {
+                lista.add(result.next().toString());
+            }
+
+            transaction.success();
+            
+        } finally {
+            transaction.finish();
+        }
+        
+        graphDataService.shutdown();
+
+        return lista;
     }
 }
