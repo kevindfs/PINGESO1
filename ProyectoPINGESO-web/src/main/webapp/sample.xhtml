@@ -2,17 +2,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>TBK</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
         <ui:composition template="./template.xhtml">
-            <ui:define name="mid">
-                <p:panel header="TBK" style="width: 1120px;height: 500px">
+            <ui:define name="mid" >
+                <p:layoutUnit position="center" header="Wu/pichula">
                     <h:form>
                         <p:panelGrid columns="2">
                             <h:outputText value="D1: "/>
@@ -23,17 +21,20 @@
                             <h:inputText value="#{tBKMB.d3}"></h:inputText>
                             <h:outputText value="Lambda: "/>
                             <h:inputText value="#{tBKMB.lambda}"></h:inputText>
+
                         </p:panelGrid>
                         <p:commandButton value="Calculate T.B.K"  actionListener="#{tBKMB.func_tbk()}" update="resultado" />
+
                         <p:panelGrid columns="2">
+
                             <h:outputText value="Output:           " />
                             <h:inputText id="resultado" value="#{tBKMB.tbk}"/>
                         </p:panelGrid>
+
                     </h:form>
-                </p:panel>
+                </p:layoutUnit>
             </ui:define>
         </ui:composition>
     </h:body>
 </html>
-
 
