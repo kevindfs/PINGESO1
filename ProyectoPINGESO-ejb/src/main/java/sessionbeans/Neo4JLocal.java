@@ -22,6 +22,10 @@ public interface Neo4JLocal {
     // Dado los ids de dos nodos, retorna la distancia entre ellos
     int distancia(int idNodoUno, int idNodoDos);
     
+    // Dados dos nodos, retorna la distancia entre ellos considerando 
+    // la dirección de la relación
+    int distanciaConDireccion(int idNodoUno, int idNodoDos);
+    
     // Dado un nodo retorna su nivel en el árbol
     int nivel(int idNodo);
     
