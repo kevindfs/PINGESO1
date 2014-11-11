@@ -170,4 +170,52 @@ public class Neo4J implements Neo4JLocal {
     public int distanciaConDireccion(int idNodoUno, int idNodoDos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void cargaTerminos(String ruta) {
+        String query = "";
+        graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
+        
+        ExecutionResult result;
+        Transaction transaction = graphDataService.beginTx();
+        ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
+        
+        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine \nFIELDTERMINATOR '#'\nCREATE (t: Term {accession: toInt(csvLine.accession), name: csvLine.name, definition: csvLine.definition});";
+        try {
+            result = engine.execute(query);
+            
+            
+
+            transaction.success();
+            
+        } finally {
+            transaction.finish();
+        }
+
+        graphDataService.shutdown();
+    }
+
+    @Override
+    public void cargaRelaciones(String ruta) {
+        String query = "";
+        graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
+        
+        ExecutionResult result;
+        Transaction transaction = graphDataService.beginTx();
+        ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
+        
+        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine\nMATCH (padre:Term {accession: toInt(csvLine.accessionPadre)}),(hijo: Term {accession: toInt(csvLine.accessionHijo)})\nCREATE (padre)-[:PADRE]->(hijo);";
+        try {
+            result = engine.execute(query);
+            
+            
+
+            transaction.success();
+            
+        } finally {
+            transaction.finish();
+        }
+        
+        graphDataService.shutdown();
+    }
 }

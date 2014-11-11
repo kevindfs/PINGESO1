@@ -14,6 +14,11 @@ import javax.ejb.Local;
  */
 @Local
 public interface Neo4JLocal {
+    // Carga los términos de la baase de datos. Recibe la ruta al csv.
+    void cargaTerminos(String ruta);
+    
+    //Carga las relaciones de la base de datos. REcibe la ruta al csv
+    void cargaRelaciones(String ruta);
     // Recibe una query en String y retorna un List<String> con la respuesta de la bd
     List<String> consulta(String _query);
     // Dados los ids de dos nodos, retorna el id del ancestro común mínimo.

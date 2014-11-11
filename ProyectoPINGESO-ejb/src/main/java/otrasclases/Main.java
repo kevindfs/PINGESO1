@@ -25,7 +25,5 @@ public class Main {
         
         // Se busca la distancia mínima entre los nodos 3 y 1
         System.out.println("La distancia mínima entre los nodos 3 y 1 es: " + bd.distancia(3, 1));
-        
-        
     }
 }
