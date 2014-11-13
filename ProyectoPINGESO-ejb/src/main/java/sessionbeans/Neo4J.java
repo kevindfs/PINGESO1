@@ -40,76 +40,6 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public int distancia(int idNodoUno, int idNodoDos) {
-        List<String> listaStrings = new ArrayList<>();
-        List<Integer> listaEnteros = new ArrayList<>();
-        String query = "", fila = "", idString = "";
-        int entero = 0, largoLista=0, i, j, largoFila = 0, minimaDistancia = 0;
-        
-        query = "MATCH (a: Term {accession:" + idNodoUno + "}),(b: Term {accession:" + idNodoDos + "}),p=a-[r:PADRE*..]->b" + "\n" + "RETURN reduce(distancia = -1, n IN nodes(p)| distancia + 1) AS reduction;";
-        
-        graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
-        
-        ExecutionResult result;
-        Transaction transaction = graphDataService.beginTx();
-        ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
-        
-        try {
-            result = engine.execute(query);
-            
-            while (result.hasNext()) {
-                
-                fila = result.next().toString();
-                listaEnteros.add(Maper.getInt(fila));
-//                Map map = new Map();
-//                largoFila = fila.length();
-                
-//                idString = "";
-//                j=largoFila-2;
-//                while(j > 0) {
-//                    if(fila.charAt(j) == ' ') {
-//                        break;
-//                    }
-//                    idString = idString + fila.charAt(j);
-//                    j--;
-//                }
-//                listaEnteros.add(result.next().toString());
-                //listaStrings.add(result.next().);
-            }
-
-            transaction.success();
-            
-        } finally {
-            transaction.finish();
-        }
-        
-        graphDataService.shutdown();
-        
-        //entero = Integer.parseInt(listaStrings.get(0));
-        
-        largoLista = listaStrings.size();
-        
-        i = 0;
-        while(i < largoLista) {
-            System.out.println(listaStrings.get(i));
-            i++;
-        }
-        
-        minimaDistancia = listaEnteros.get(0);
-        largoLista = listaEnteros.size();
-        i=0;
-        while(i < largoLista) {
-            if(listaEnteros.get(i) < minimaDistancia) minimaDistancia = listaEnteros.get(i);
-            i++;
-        }
-        
-        return minimaDistancia;
-    }
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-
-    @Override
     public int nivel(int idNodo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -167,11 +97,6 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public int distanciaConDireccion(int idNodoUno, int idNodoDos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void cargaBaseDeDatos(String ruta) {
         String query = "";
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
@@ -190,5 +115,34 @@ public class Neo4J implements Neo4JLocal {
         }
 
         graphDataService.shutdown();
+    }
+
+    @Override
+    public int distancia(int accessionUno, int accessionDos) {
+        String datoString, query = "MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),p=a-[r:FATHER*..]->b RETURN reduce(distancia = -1, n IN nodes(p)| distancia + 1) AS reduction;";
+        int i, datoEntero, largoLista, distancia;
+        List<Integer> listaEnteros = new ArrayList<>();
+
+        List<String> listaConsulta = new ArrayList<>(this.consulta(query));
+        largoLista = listaConsulta.size();
+        
+        // Se obtienen los datos
+        i=0;
+        while(i < largoLista) {
+            datoString = Maper.getString(listaConsulta.get(i));
+            datoEntero = Integer.parseInt(datoString);
+            listaEnteros.add(datoEntero);
+            i++;
+        }
+        
+        // Se obtienen la distancia mínima
+        i=1;
+        distancia = listaEnteros.get(0);
+        while(i < largoLista) {
+            if(listaEnteros.get(i) < distancia) distancia = listaEnteros.get(i);
+            i++;
+        }
+
+        return distancia;
     }
 }
