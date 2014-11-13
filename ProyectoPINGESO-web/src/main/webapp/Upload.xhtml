@@ -5,8 +5,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-
-
     <h:head>
         <title>Upload information</title>
     </h:head>
@@ -14,8 +12,8 @@
     <h:body>
         <ui:composition template="./template.xhtml">
             <ui:define name="mid">
-                <p:panel header="Genetic Analysis" style="width: 1120px;height: 500px">
-                    <h:form style="width:500px">
+                <p:panel  header="Genetic Analysis" >
+                    <h:form>
                         <div class="ui-grid">
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-10">
@@ -28,7 +26,6 @@
                                     <p:growl id="msg"></p:growl>
                                     <p:fileUpload value="#{fileUploadManagedBean.file}" mode="advanced"
                                                   fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" update="msg"></p:fileUpload>
-
                                 </div>
                             </div>
                         </div>

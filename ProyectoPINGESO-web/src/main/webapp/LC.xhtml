@@ -5,27 +5,25 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>TBK</title>
+        <title>Leacock-Chodorow</title>
     </h:head>
     <h:body>
         <ui:composition template="./template.xhtml">
             <ui:define name="mid">
-                <p:panel header="TBK">
+                <p:panel header="Leacock-Chodorow">
                     <h:form>
                         <p:panelGrid columns="2">
                             <h:outputText value="D1: "/>
-                            <h:inputText value="#{tBKMB.d1}"></h:inputText>
+                            <h:inputText value="#{leacockChodorowMB.d1}"></h:inputText>
                             <h:outputText value="D2: "/>
-                            <h:inputText value="#{tBKMB.d2}"></h:inputText>
-                            <h:outputText value="D3: "/>
-                            <h:inputText value="#{tBKMB.d3}"></h:inputText>
-                            <h:outputText value="Lambda: "/>
-                            <h:inputText value="#{tBKMB.lambda}"></h:inputText>
+                            <h:inputText value="#{leacockChodorowMB.d2}"></h:inputText>
+                            <h:outputText value="D: "/>
+                            <h:inputText value="#{leacockChodorowMB.d}"></h:inputText>                              
                         </p:panelGrid>
-                        <p:commandButton value="Calculate T.B.K"  actionListener="#{tBKMB.func_tbk()}" update="resultado" />
+                        <p:commandButton value="Calculate Leacock-Chodorow"  actionListener="#{leacockChodorowMB.func_lc()}" update="resultado" />
                         <p:panelGrid columns="2">
-                            <h:outputText value="Output:           " />
-                            <h:inputText id="resultado" value="#{tBKMB.tbk}"/>
+                            <h:outputText value="Output:" />
+                            <h:inputText id="resultado" value="#{leacockChodorowMB.salida}"/>
                         </p:panelGrid>
                     </h:form>
                 </p:panel>
