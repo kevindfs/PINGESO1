@@ -15,15 +15,20 @@ public class Main {
     public static void main(String args[]) {
         // Se crea una instancia de base de datos en la carpeta mibase
         // OJO ESTA DIRECCION ES DE MI NOTEBOOK, TIENES QUE CAMBIARLA 
-        Neo4J bd = new Neo4J("C:\\Users\\alonso\\Documents\\Neo4j\\mibase");
+        Neo4J bd = new Neo4J("C:\\Users\\alonso\\Documents\\Neo4j\\mibd");
+        
+        // Ejemplo de carga de la base de datos.
+        // Se le entrega la ubicación del archivo como argunmento.
+        // bd.cargaBaseDeDatos("file:c:/Users/alonso/Desktop/bd.csv");
 
         // Se busca la distancia minima entre los nodos 8 y 0
-        System.out.println("La distancia mínima entre los nodos 8 y 0 es: " + bd.distancia(8, 0));
+        //System.out.println("La distancia mínima entre los nodos 8 y 0 es: " + bd.distancia(14, 4493));
+        
         
         // Se busca la distancia mínima entre los nodos 0 y 8
-        System.out.println("La distancia mínima entre los nodos 0 y 8 es: " + bd.distancia(0, 8));
+        //System.out.println("La distancia mínima entre los nodos 0 y 8 es: " + bd.distancia(0, 8));
         
         // Se busca la distancia mínima entre los nodos 3 y 1
-        System.out.println("La distancia mínima entre los nodos 3 y 1 es: " + bd.distancia(3, 1));
+        //System.out.println("La distancia mínima entre los nodos 3 y 1 es: " + bd.distancia(3, 1));
     }
 }

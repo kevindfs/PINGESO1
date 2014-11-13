@@ -46,7 +46,7 @@ public class Neo4J implements Neo4JLocal {
         String query = "", fila = "", idString = "";
         int entero = 0, largoLista=0, i, j, largoFila = 0, minimaDistancia = 0;
         
-        query = "MATCH (a: Term {id:" + idNodoUno + "}),(b: Term {id:" + idNodoDos + "}),p=a-[r:FATHER*..]-b" + "\n" + "RETURN reduce(distancia = -1, n IN nodes(p)| distancia + 1) AS reduction;";
+        query = "MATCH (a: Term {accession:" + idNodoUno + "}),(b: Term {accession:" + idNodoDos + "}),p=a-[r:PADRE*..]->b" + "\n" + "RETURN reduce(distancia = -1, n IN nodes(p)| distancia + 1) AS reduction;";
         
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
         
@@ -172,7 +172,7 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public void cargaTerminos(String ruta) {
+    public void cargaBaseDeDatos(String ruta) {
         String query = "";
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
         
@@ -180,42 +180,15 @@ public class Neo4J implements Neo4JLocal {
         Transaction transaction = graphDataService.beginTx();
         ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
         
-        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine \nFIELDTERMINATOR '#'\nCREATE (t: Term {accession: toInt(csvLine.accession), name: csvLine.name, definition: csvLine.definition});";
+        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine\nMERGE (padre:Term {accession: toInt(csvLine.accessionPadre)})\nMERGE (hijo: Term {accession: toInt(csvLine.accessionHijo)})\nCREATE (padre)-[:FATHER]->(hijo);";
         try {
             result = engine.execute(query);
-            
-            
-
             transaction.success();
             
         } finally {
             transaction.finish();
         }
 
-        graphDataService.shutdown();
-    }
-
-    @Override
-    public void cargaRelaciones(String ruta) {
-        String query = "";
-        graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
-        
-        ExecutionResult result;
-        Transaction transaction = graphDataService.beginTx();
-        ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
-        
-        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine\nMATCH (padre:Term {accession: toInt(csvLine.accessionPadre)}),(hijo: Term {accession: toInt(csvLine.accessionHijo)})\nCREATE (padre)-[:PADRE]->(hijo);";
-        try {
-            result = engine.execute(query);
-            
-            
-
-            transaction.success();
-            
-        } finally {
-            transaction.finish();
-        }
-        
         graphDataService.shutdown();
     }
 }
