@@ -43,8 +43,8 @@ public interface Neo4JLocal {
     // Dado dos nodos, retorna true si estos estan en la misma vecindad
     boolean mismaVecindad(int idNodoUno, int idNodoDos);
 
-    // Dado los ids de dos nodos, retorna true si el nodoUno es padre del nodoDos
-    boolean esPadre(int idNodoUno, int idNodoDos);
+    // Retorna true si accessionUno es padre de accessionDos, retorna false en otro caso.
+    boolean esPadre(int accessionUno, int accessionDos);
 
     // Dado los ids de dos nodos, retorna true si el nodoUno es padre del nodoDos
     boolean esHijo(int idNodoUno, int idNodoDos);

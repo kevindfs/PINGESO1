@@ -59,8 +59,16 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public boolean esPadre(int idNodoUno, int idNodoDos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean esPadre(int accessionUno, int accesionDos) {
+        List<Integer> listaPadres = new ArrayList<>(this.padres(accesionDos));
+        int largoLista = listaPadres.size(), i;
+        
+        i=0;
+        while(i < largoLista) {
+            if(accessionUno == listaPadres.get(i))  return true;
+            i++;
+        }
+        return false;
     }
 
     @Override

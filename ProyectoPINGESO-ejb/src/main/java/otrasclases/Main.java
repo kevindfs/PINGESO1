@@ -26,5 +26,7 @@ public class Main {
 
         // Se busca la distancia mínima entre los nodos 0 y 7
 //        System.out.println("La distancia mínima entre los nodos 0 y 7 es: " + bd.distancia(0, 7));
+        
+        System.out.println(bd.esPadre(2, 8));
     }
 }
