@@ -19,7 +19,7 @@ public class Main {
         
         // Ejemplo de carga de la base de datos.
         // Se le entrega la ubicación del archivo como argunmento.
-//        bd.cargaBaseDeDatos("file:c:/Users/alonso/Desktop/bd.csv");
+//        bd.consulta("CREATE INDEX ON :Term(accession);");
 
         // Se busca la distancia mínima entre los nodos 0 y 7
 //        System.out.println("La distancia mínima entre los nodos 0 y 7 es: " + bd.distancia(0, 7));

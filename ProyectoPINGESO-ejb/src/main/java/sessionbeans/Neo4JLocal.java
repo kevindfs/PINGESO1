@@ -14,7 +14,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface Neo4JLocal {
-    // Carga la base de datos del proyecto
+    // Carga la base de datos del proyecto.
+    // Recibe la ruta en la que se encuentra el archivo csv.
+    // El formato para la ruta debe ser este: "file:c:/Users/alonso/Desktop/archivo.csv".
     void cargaBaseDeDatos(String path);
 
     // Recibe una query en String y retorna un List<String> con la respuesta de la bd

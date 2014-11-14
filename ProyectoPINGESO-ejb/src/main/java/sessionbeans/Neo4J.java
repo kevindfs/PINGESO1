@@ -38,6 +38,10 @@ public class Neo4J implements Neo4JLocal {
     public int ancestroComunMinimo(int idNodoUno, int idNodoDos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    private void creaIndice() {
+        this.consulta("CREATE INDEX ON :Term(accession);");
+    }
 
     @Override
     public int nivel(int idNodo) {
@@ -98,6 +102,7 @@ public class Neo4J implements Neo4JLocal {
 
     @Override
     public void cargaBaseDeDatos(String ruta) {
+        this.creaIndice();
         String query = "";
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
         
