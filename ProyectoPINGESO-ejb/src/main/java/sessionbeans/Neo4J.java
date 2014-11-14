@@ -150,4 +150,20 @@ public class Neo4J implements Neo4JLocal {
 
         return distancia;
     }
+
+    @Override
+    public List<Integer> padres(int accession) {
+        List<String> listaConsulta = new ArrayList<>(this.consulta("MATCH (a: Term {accession: " + accession + "}),(a)<-[:FATHER]-(b) RETURN b.accession;"));
+        List<Integer> listaAccessions = new ArrayList<>();
+        String datoString;
+        int i, largoLista = listaConsulta.size();
+
+        i=0;
+        while(i < largoLista) {
+            datoString = Maper.getString(listaConsulta.get(i));
+            listaAccessions.add(Integer.parseInt(datoString));
+            i++;
+        }
+        return listaAccessions;
+    }
 }

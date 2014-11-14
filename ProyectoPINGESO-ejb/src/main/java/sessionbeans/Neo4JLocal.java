@@ -18,6 +18,9 @@ public interface Neo4JLocal {
     // Recibe la ruta en la que se encuentra el archivo csv.
     // El formato para la ruta debe ser este: "file:c:/Users/alonso/Desktop/archivo.csv".
     void cargaBaseDeDatos(String path);
+    
+    // Recibe el accession de un término y retorna una lista con los accession's de sus padres.
+    List<Integer> padres(int accession);
 
     // Recibe una query en String y retorna un List<String> con la respuesta de la bd
     List<String> consulta(String _query);
