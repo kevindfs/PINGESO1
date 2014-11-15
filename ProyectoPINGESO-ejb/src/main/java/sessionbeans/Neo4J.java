@@ -43,7 +43,6 @@ public class Neo4J implements Neo4JLocal {
         if(this.esPadre(accessionDos, accessionUno)) {
             return accessionDos;
         }
-//        this.consulta("MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),(c),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;");
         return Integer.parseInt(Maper.getString(this.consulta("MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),(c),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;").get(0)));
     }
     
@@ -126,7 +125,7 @@ public class Neo4J implements Neo4JLocal {
         Transaction transaction = graphDataService.beginTx();
         ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
         
-        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine\nMERGE (padre:Term {accession: toInt(csvLine.accessionPadre)})\nMERGE (hijo: Term {accession: toInt(csvLine.accessionHijo)})\nCREATE (padre)-[:FATHER]->(hijo);";
+        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine\nMERGE (padre:Term {accession: toInt(csvLine.accessionPadre)})\nMERGE (hijo: Term {accession: toInt(csvLine.accessionHijo)})\nCREATE (padre)<-[:FATHER]-(hijo);";
         try {
             result = engine.execute(query);
             transaction.success();
