@@ -21,12 +21,12 @@ public class Main {
         
         // Ejemplo de carga de la base de datos.
         // Se le entrega la ubicación del archivo como argunmento.
-//        System.out.println(bd.consulta("MATCH (a: Term {accession: 1}),(a)<-[:FATHER]-(b) RETURN b.accession;").get(0));
+        int accessionUno = 7, accessionDos = 8;
+        System.out.println(bd.ancestroComunMinimo(7,4));
 //        System.out.println(bd.consulta("MATCH (a: Term {accession: 8}),(a)<-[:FATHER]-(b) RETURN b.accession;").get(1));
 
         // Se busca la distancia mínima entre los nodos 0 y 7
 //        System.out.println("La distancia mínima entre los nodos 0 y 7 es: " + bd.distancia(0, 7));
         
-        System.out.println(bd.esPadre(2, 8));
     }
 }

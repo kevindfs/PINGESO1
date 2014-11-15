@@ -35,8 +35,16 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public int ancestroComunMinimo(int idNodoUno, int idNodoDos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int ancestroComunMinimo(int accessionUno, int accessionDos) {
+        if(this.esPadre(accessionUno, accessionDos) ) {
+            return accessionUno;
+        }
+        
+        if(this.esPadre(accessionDos, accessionUno)) {
+            return accessionDos;
+        }
+//        this.consulta("MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),(c),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;");
+        return Integer.parseInt(Maper.getString(this.consulta("MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),(c),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;").get(0)));
     }
     
     private void creaIndice() {
