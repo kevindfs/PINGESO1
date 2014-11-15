@@ -43,7 +43,6 @@ public class Neo4J implements Neo4JLocal {
         if(this.esPadre(accessionDos, accessionUno)) {
             return accessionDos;
         }
-//        this.consulta("MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),(c),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;");
         return Integer.parseInt(Maper.getString(this.consulta("MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),(c),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;").get(0)));
     }
     
