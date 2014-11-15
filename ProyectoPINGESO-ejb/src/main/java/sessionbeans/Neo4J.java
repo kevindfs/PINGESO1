@@ -126,7 +126,7 @@ public class Neo4J implements Neo4JLocal {
         Transaction transaction = graphDataService.beginTx();
         ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
         
-        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine\nMERGE (padre:Term {accession: toInt(csvLine.accessionPadre)})\nMERGE (hijo: Term {accession: toInt(csvLine.accessionHijo)})\nCREATE (padre)-[:FATHER]->(hijo);";
+        query = "LOAD CSV WITH HEADERS FROM \"" + ruta + "\" AS csvLine\nMERGE (padre:Term {accession: toInt(csvLine.accessionPadre)})\nMERGE (hijo: Term {accession: toInt(csvLine.accessionHijo)})\nCREATE (padre)<-[:FATHER]-(hijo);";
         try {
             result = engine.execute(query);
             transaction.success();
