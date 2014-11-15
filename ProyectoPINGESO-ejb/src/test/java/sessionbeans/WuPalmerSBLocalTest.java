@@ -5,7 +5,6 @@
  */
 package sessionbeans;
 
-import javax.ejb.embeddable.EJBContainer;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,26 +12,31 @@ import static org.junit.Assert.*;
  *
  * @author Italo
  */
-public class WuPalmerSBTest {
+public class WuPalmerSBLocalTest {
     
-    public WuPalmerSBTest() {
+    public WuPalmerSBLocalTest() {
     }
     
     /**
-     * Test of CalcularWuPalmer method, of class WuPalmerSB.
+     * Test of CalcularWuPalmer method, of class WuPalmerSBLocal.
      */
     @Test
-    public void testCalcularWuPalmer() throws Exception {
+    public void testCalcularWuPalmer() {
         System.out.println("CalcularWuPalmer");
         int D1 = 0;
         int D2 = 0;
         int D3 = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        WuPalmerSBLocal instance = (WuPalmerSBLocal)container.getContext().lookup("java:global/classes/WuPalmerSB");
+        WuPalmerSBLocal instance = new WuPalmerSBLocalImpl();
         float expResult = 0.0F;
         float result = instance.CalcularWuPalmer(D1, D2, D3);
         assertEquals(expResult, result, 0.0);
-        container.close();
+    }
+
+    public class WuPalmerSBLocalImpl implements WuPalmerSBLocal {
+
+        public float CalcularWuPalmer(int D1, int D2, int D3) {
+            return 0.0F;
+        }
     }
     
 }
