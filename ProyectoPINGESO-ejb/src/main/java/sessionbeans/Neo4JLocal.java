@@ -14,8 +14,13 @@ import javax.ejb.Local;
  */
 @Local
 public interface Neo4JLocal {
-    // Carga la base de datos del proyecto
+    // Carga la base de datos del proyecto.
+    // Recibe la ruta en la que se encuentra el archivo csv.
+    // El formato para la ruta debe ser este: "file:c:/Users/alonso/Desktop/archivo.csv".
     void cargaBaseDeDatos(String path);
+    
+    // Recibe el accession de un término y retorna una lista con los accession's de sus padres.
+    List<Integer> padres(int accession);
 
     // Recibe una query en String y retorna un List<String> con la respuesta de la bd
     List<String> consulta(String _query);
@@ -38,8 +43,8 @@ public interface Neo4JLocal {
     // Dado dos nodos, retorna true si estos estan en la misma vecindad
     boolean mismaVecindad(int idNodoUno, int idNodoDos);
 
-    // Dado los ids de dos nodos, retorna true si el nodoUno es padre del nodoDos
-    boolean esPadre(int idNodoUno, int idNodoDos);
+    // Retorna true si accessionUno es padre de accessionDos, retorna false en otro caso.
+    boolean esPadre(int accessionUno, int accessionDos);
 
     // Dado los ids de dos nodos, retorna true si el nodoUno es padre del nodoDos
     boolean esHijo(int idNodoUno, int idNodoDos);

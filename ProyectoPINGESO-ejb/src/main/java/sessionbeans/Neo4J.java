@@ -35,8 +35,20 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public int ancestroComunMinimo(int idNodoUno, int idNodoDos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int ancestroComunMinimo(int accessionUno, int accessionDos) {
+        if(this.esPadre(accessionUno, accessionDos) ) {
+            return accessionUno;
+        }
+        
+        if(this.esPadre(accessionDos, accessionUno)) {
+            return accessionDos;
+        }
+//        this.consulta("MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),(c),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;");
+        return Integer.parseInt(Maper.getString(this.consulta("MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),(c),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;").get(0)));
+    }
+    
+    private void creaIndice() {
+        this.consulta("CREATE INDEX ON :Term(accession);");
     }
 
     @Override
@@ -55,8 +67,16 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public boolean esPadre(int idNodoUno, int idNodoDos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean esPadre(int accessionUno, int accesionDos) {
+        List<Integer> listaPadres = new ArrayList<>(this.padres(accesionDos));
+        int largoLista = listaPadres.size(), i;
+        
+        i=0;
+        while(i < largoLista) {
+            if(accessionUno == listaPadres.get(i))  return true;
+            i++;
+        }
+        return false;
     }
 
     @Override
@@ -98,6 +118,7 @@ public class Neo4J implements Neo4JLocal {
 
     @Override
     public void cargaBaseDeDatos(String ruta) {
+        this.creaIndice();
         String query = "";
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
         
@@ -144,5 +165,21 @@ public class Neo4J implements Neo4JLocal {
         }
 
         return distancia;
+    }
+
+    @Override
+    public List<Integer> padres(int accession) {
+        List<String> listaConsulta = new ArrayList<>(this.consulta("MATCH (a: Term {accession: " + accession + "}),(a)<-[:FATHER]-(b) RETURN b.accession;"));
+        List<Integer> listaAccessions = new ArrayList<>();
+        String datoString;
+        int i, largoLista = listaConsulta.size();
+
+        i=0;
+        while(i < largoLista) {
+            datoString = Maper.getString(listaConsulta.get(i));
+            listaAccessions.add(Integer.parseInt(datoString));
+            i++;
+        }
+        return listaAccessions;
     }
 }
