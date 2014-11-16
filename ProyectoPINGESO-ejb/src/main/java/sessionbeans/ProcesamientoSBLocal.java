@@ -6,12 +6,11 @@
 package sessionbeans;
 
 import javax.ejb.Local;
-
 /**
  *
  * @author Italo
  */
 @Local
 public interface ProcesamientoSBLocal {
-    
+
 }
