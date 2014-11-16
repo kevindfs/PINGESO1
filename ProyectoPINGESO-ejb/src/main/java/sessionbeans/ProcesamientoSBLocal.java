@@ -7,7 +7,6 @@ package sessionbeans;
 
 import java.util.List;
 import javax.ejb.Local;
-
 /**
  *
  * @author Italo

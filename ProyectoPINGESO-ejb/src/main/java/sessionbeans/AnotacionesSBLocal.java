@@ -29,5 +29,7 @@ public interface AnotacionesSBLocal {
     List<Anotaciones> findRange(int[] range);
 
     int count();
+
+    List encontrarTerminos(String nombreGen);
     
 }
