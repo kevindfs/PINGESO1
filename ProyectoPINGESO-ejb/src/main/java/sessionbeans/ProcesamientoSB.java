@@ -5,7 +5,9 @@
  */
 package sessionbeans;
 
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.xml.registry.Query;
 
 /**
  *
@@ -13,6 +15,10 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class ProcesamientoSB implements ProcesamientoSBLocal {
+
+    @Override
+    public List obtenerTerminos(String NombreGen) {
+        return null;
+    }
     
-    
-}
+   }

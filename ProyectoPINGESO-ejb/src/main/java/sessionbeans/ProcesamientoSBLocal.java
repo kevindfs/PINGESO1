@@ -5,6 +5,7 @@
  */
 package sessionbeans;
 
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +14,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface ProcesamientoSBLocal {
+
+    List obtenerTerminos(String NombreGen);
     
 }
