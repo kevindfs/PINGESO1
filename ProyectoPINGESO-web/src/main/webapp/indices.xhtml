@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="mid">
+                <p:panel header="Genetic Analysis">
+                    <h4>Load your File</h4>
+                    <p:growl id="msg" showDetail="true" />
+                    <p:fileUpload value="#{fileUploadManagedBean.file}" mode="advanced" 
+                                  fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" dragDropSupport="false"
+                                  update="msg" sizeLimit="1000000000" 
+                                  fileLimit="3" allowTypes="/(\.|\/)(doc|docx)$/"></p:fileUpload>
+                    <br/>
+                    <p:separator/>
+                    <br/>
+                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                        <p:selectCheckboxMenu id="menuIndices" value="#{mbIndices.indicesSelecionados}" 
+                                              label="Select Indices" filter="true" 
+                                              filterMatchMode="startsWith" panelStyle="width:300px">
+                            <f:selectItems value="#{mbIndices.indices}" />
+                        </p:selectCheckboxMenu>
+                        <p:commandButton value="Calculate indices" icon="ui-icon-calculator"/>
+                    </h:panelGrid>
+                    <br/>
+                    <p:separator/>
+                    <br/>
+                    <p:dataTable id="tbl1" value="Result" scrollable="true">
+                        <p:column headerText="Cluster">
+                        </p:column>
+
+                        <p:column headerText="TBK">
+                        </p:column>
+
+                        <p:column headerText="Wu-Palmer">
+                        </p:column>
+
+                        <p:column headerText="Leacock-Chodorow">
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+
+
+</html>
+

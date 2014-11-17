@@ -23,9 +23,11 @@
                                         <p:commandButton value="Generate" icon="ui-icon-calculator"/>
                                     </h:panelGrid>
                                     <p:separator/>
+
+                                    <h3></h3>
+                                    <p:button icon="ui-icon-circle-arrow-s" href="ftp://ftp.geneontology.org/pub/godatabase/archive/go_daily-termdb.rdf-xml.gz" 
+                                              value="XML"/>
                                     <p:growl id="msg"></p:growl>
-                                    <p:fileUpload value="#{fileUploadManagedBean.file}" mode="advanced"
-                                                  fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" update="msg"></p:fileUpload>
                                 </div>
                             </div>
                         </div>

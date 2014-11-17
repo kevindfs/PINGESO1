@@ -5,20 +5,21 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-
-
-    <h:head>
-        <title>Help</title>
-    </h:head>
-
     <h:body>
         <ui:composition template="./template.xhtml">
             <ui:define name="mid">
-                <p:panel header="Help" >
-                    Help
+                <p:panel header="Genes" >
+                    <p:lightBox iframe="true" id="lighbox3" width="800px" height="400px">
+                        <h:outputLink value="http://geneontology.org" title="Gene Ontology">
+                            <p:commandButton value="Go to Gene Ontology" icon="ui-icon-arrow"/>
+                        </h:outputLink>
+                    </p:lightBox>
                 </p:panel>
             </ui:define>
         </ui:composition>
     </h:body>
-
 </html>
+
+
+
+
