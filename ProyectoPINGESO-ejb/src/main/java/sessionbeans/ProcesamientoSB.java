@@ -117,4 +117,18 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
         //System.out.println("Cantidad Pares por combinacion de genes:" + listaPares2.size());
         return listaPares2;
     }
+
+    @Override
+    public int invierteNumero(int numero) {
+        int numeroInvertido = 0 ; 
+        int division = numero ; 
+        int restoDivision = 0; 
+        while (division != 0) { 
+            restoDivision = division % 10 ; 
+            division = division / 10 ; 
+            numeroInvertido = numeroInvertido * 10 + restoDivision; 
+        } 
+        return numeroInvertido;
+    }
+    
 }
