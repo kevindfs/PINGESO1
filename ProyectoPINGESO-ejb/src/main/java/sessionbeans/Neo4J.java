@@ -139,6 +139,7 @@ public class Neo4J implements Neo4JLocal {
 
     @Override
     public int distancia(int accessionUno, int accessionDos) {
+        if(accessionUno == accessionDos)    return 0;
         String datoString, query = "MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),p=a-[r:FATHER*..]->b RETURN reduce(distancia = -1, n IN nodes(p)| distancia + 1) AS reduction;";
         int i, datoEntero, largoLista, distancia;
         List<Integer> listaEnteros = new ArrayList<>();
