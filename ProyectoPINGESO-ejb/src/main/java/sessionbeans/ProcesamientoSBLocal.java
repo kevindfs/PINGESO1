@@ -19,7 +19,7 @@ public interface ProcesamientoSBLocal {
     
     List<ParTerminos> combinaTerminos(List<Integer> lista1, List<Integer> lista2);
     
-    float CoreApp(List<String> genes);
+    float CoreApp(List<String> genes, int opcion);
 
     int invierteNumero(int numero);
     

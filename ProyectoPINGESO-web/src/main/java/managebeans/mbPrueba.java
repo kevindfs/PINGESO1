@@ -46,7 +46,7 @@ public class mbPrueba {
     public void init() {
         genes.clear();
         genes.add("AAC1");genes.add("AAC3");
-        float ListaGenes= procesamientoSB.CoreApp(genes);
+        float ListaGenes= procesamientoSB.CoreApp(genes, 1);
   }
     
     

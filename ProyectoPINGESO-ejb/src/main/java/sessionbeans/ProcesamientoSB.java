@@ -20,6 +20,16 @@ import javax.xml.registry.Query;
  */
 @Stateless
 public class ProcesamientoSB implements ProcesamientoSBLocal {
+    
+    @EJB
+    private LeacockChodorowSBLocal leacockChodorowSB;
+    
+    @EJB
+    private TBKSBLocal tBKSB;
+    
+    @EJB
+    private WuPalmerSBLocal wuPalmerSB;
+    
     @EJB
     private Neo4JLocal neo4J;
 
@@ -27,10 +37,13 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
     private AnotacionesSBLocal anotacionesSB;
     
     @Override
-    public float CoreApp(List<String> genes) {
+    public float CoreApp(List<String> genes, int opcion) {
         //Si indice es 1 => Llamar a WuPalmer
         //Si indice es 2 => LLamar a TBK
         //Si indice es 3 => Llamar a Leacock-Chodorow
+        float indiceWuPalmer=0;
+        float indiceTBK = 0;
+        float indiceLeacockChodorow = 0;
         int largoListaGenes=genes.size();
         System.out.println("Largo Lista Genes: "+ largoListaGenes);
         List<List<Integer>> matrizTerminos = new ArrayList<>();
@@ -58,23 +71,42 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
         int largoListaPares = listaPares.size();
         int term1, term2;
         System.out.println("Cantidad Pares a consultar:" + largoListaPares);
-        int D1,D2,D3;
+        int D1=0,D2=0,D3=0, idACM;
         Neo4J db = new Neo4J("C:\\Users\\Kevin\\Documents\\Neo4j\\godb");
         for (int k = 0; k < largoListaPares; k++) {
-            System.out.println("Entré al for, valor k: " + k);
             term1 = listaPares.get(k).getTermino1();
             term2 = listaPares.get(k).getTermino2();
             System.out.println("Termino1: " +term1 +" Termino2: "+term2);
-            int idACM = db.ancestroComunMinimo(term1, term2);
-            System.out.println("ACM: "+ idACM);
-            D1 = db.distancia(idACM, term1);
-            System.out.println("D1: " + D1);
-            D2 = db.distancia(idACM, term2);
-            System.out.println("D2: " + D2);
-            D3 = db.distancia(8150, idACM);
-            System.out.println("D3: " + D3);
+            if (term1!=term2){
+                idACM = db.ancestroComunMinimo(term1, term2);
+                System.out.println("ACM: "+ idACM);
+                if(idACM==8150){
+                    D1 = db.distancia(idACM, term1);
+                    System.out.println("D1: " + D1);
+                    D2 = db.distancia(idACM, term2);
+                    System.out.println("D2: " + D2);
+                    D3 = 0;
+                    System.out.println("D3: " + D3);
+                }
+                else{
+                    D1 = db.distancia(idACM, term1);
+                    System.out.println("D1: " + D1);
+                    D2 = db.distancia(idACM, term2);
+                    System.out.println("D2: " + D2);
+                    D3 = db.distancia(8150, idACM);
+                    System.out.println("D3: " + D3);
+                }
+    
+            }
+            else{
+                System.out.println("Terminos Iguales");
+            }
+            if(opcion ==1){
+            float wp = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
+            indiceWuPalmer = indiceWuPalmer + wp;
+                System.out.println("Wu Palmer:  "+ wp);
+            }
         }
-        
         //int dist = db.distancia(8150, 1);
         //System.out.println("idACM: "+ idACM);
         //System.out.println("dist: "+ dist);
@@ -83,9 +115,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
             //Imprimir los pares
             System.out.println(listaPares.get(k).getTermino1() + " : "+ listaPares.get(k).getTermino2());
         */
-        
-        
-        return 0.0F;
+        return (indiceWuPalmer/largoListaPares);
     }
 
     @Override
