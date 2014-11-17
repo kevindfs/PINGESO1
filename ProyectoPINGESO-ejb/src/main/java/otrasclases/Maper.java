@@ -24,7 +24,7 @@ public class Maper {
         j=largoFila-2;
         while(j > 0) {
             if(fila.charAt(j) == ' ') break;
-            dato = dato + fila.charAt(j);
+            dato = fila.charAt(j) + dato;
             j--;
         }
         return dato;
