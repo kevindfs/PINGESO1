@@ -9,8 +9,11 @@ import entities.Anotaciones;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import java.util.List;
 import javax.ejb.Stateless;
 import otrasclases.ParTerminos;
+import javax.xml.registry.Query;
+
 
 /**
  *
@@ -20,7 +23,13 @@ import otrasclases.ParTerminos;
 public class ProcesamientoSB implements ProcesamientoSBLocal {
     @EJB
     private Neo4JLocal neo4J;
-    
+
+
+    @Override
+    public List obtenerTerminos(String NombreGen) {
+        return null;
+    }
+
     @EJB
     private AnotacionesSBLocal anotacionesSB;
     

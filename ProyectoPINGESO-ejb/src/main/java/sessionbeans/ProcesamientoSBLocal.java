@@ -16,10 +16,6 @@ import otrasclases.ParTerminos;
 @Local
 public interface ProcesamientoSBLocal {
 
-    float CoreApp(List<String> genes);
-
-    List<Integer> terminosDeUnGen(String gen);
-
-    List<ParTerminos> combinaTerminos(List<Integer> lista1, List<Integer> lista2);
-
+    List obtenerTerminos(String NombreGen);
+    
 }
