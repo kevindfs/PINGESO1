@@ -36,6 +36,10 @@ public class Neo4J implements Neo4JLocal {
 
     @Override
     public int ancestroComunMinimo(int accessionUno, int accessionDos) {
+        if(accessionUno == 8150 || accessionDos == 8150)    return 8150;
+
+        if(accessionUno == accessionDos)    return accessionUno;
+
         if(this.esPadre(accessionUno, accessionDos) ) {
             return accessionUno;
         }
