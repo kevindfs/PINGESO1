@@ -189,4 +189,12 @@ public class Neo4J implements Neo4JLocal {
         }
         return listaAccessions;
     }
+
+    @Override
+    public int raiz() {
+        int root;
+        List<String> lista = new ArrayList<>(this.consulta("MATCH (n) WHERE NOT (n)<-[:FATHER]-() RETURN n.accession;"));
+        root = Integer.parseInt(Maper.getString(lista.get(0)));
+        return root;
+    }
 }
