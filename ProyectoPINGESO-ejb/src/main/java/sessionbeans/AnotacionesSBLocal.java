@@ -30,6 +30,6 @@ public interface AnotacionesSBLocal {
 
     int count();
 
-    List encontrarTerminos(String nombreGen);
+    List<Anotaciones> encontrarTerminos(String nombreGen);
     
 }

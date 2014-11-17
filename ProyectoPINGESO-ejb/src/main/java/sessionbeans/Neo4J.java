@@ -158,8 +158,11 @@ public class Neo4J implements Neo4JLocal {
         // Se obtienen la distancia mínima
         i=1;
         distancia = listaEnteros.get(0);
+        System.out.println("Distancia 0:" + distancia);
         while(i < largoLista) {
-            if(listaEnteros.get(i) < distancia) distancia = listaEnteros.get(i);
+            if(listaEnteros.get(i) < distancia){
+                distancia = listaEnteros.get(i);
+            }
             i++;
         }
 

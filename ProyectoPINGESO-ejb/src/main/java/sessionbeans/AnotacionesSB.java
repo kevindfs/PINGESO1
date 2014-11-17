@@ -35,7 +35,7 @@ public class AnotacionesSB extends AbstractFacade<Anotaciones> implements Anotac
      */
     
     @Override
-    public List encontrarTerminos(String nombreGen) {
+    public List<Anotaciones> encontrarTerminos(String nombreGen) {
         Query query;
         query = em.createNamedQuery("Anotaciones.findByGen")
                 .setParameter("gen", nombreGen);
