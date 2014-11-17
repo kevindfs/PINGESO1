@@ -5,7 +5,6 @@
  */
 package sessionbeans;
 
-import entities.Anotaciones;
 import java.util.List;
 import javax.ejb.Local;
 import otrasclases.ParTerminos;
@@ -15,7 +14,11 @@ import otrasclases.ParTerminos;
  */
 @Local
 public interface ProcesamientoSBLocal {
-
-    List obtenerTerminos(String NombreGen);
+    
+    List<Integer> terminosDeUnGen(String gen);
+    
+    List<ParTerminos> combinaTerminos(List<Integer> lista1, List<Integer> lista2);
+    
+    float CoreApp(List<String> genes);
     
 }

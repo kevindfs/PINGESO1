@@ -14,7 +14,6 @@ import javax.ejb.Stateless;
 import otrasclases.ParTerminos;
 import javax.xml.registry.Query;
 
-
 /**
  *
  * @author Italo
@@ -23,12 +22,6 @@ import javax.xml.registry.Query;
 public class ProcesamientoSB implements ProcesamientoSBLocal {
     @EJB
     private Neo4JLocal neo4J;
-
-
-    @Override
-    public List obtenerTerminos(String NombreGen) {
-        return null;
-    }
 
     @EJB
     private AnotacionesSBLocal anotacionesSB;
@@ -47,7 +40,8 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
             
         }
         System.out.println(matrizTerminos);
-        int i=0,j=0;
+        int i=0;
+        int j;
         List <ParTerminos> listaTemp = new ArrayList<>();
         List <ParTerminos> listaPares = new ArrayList<>();
         while (i<largoListaGenes) {
