@@ -9,8 +9,6 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import sessionbeans.TBKSBLocal;
-
-
 /**
  *
  * @author Kevin

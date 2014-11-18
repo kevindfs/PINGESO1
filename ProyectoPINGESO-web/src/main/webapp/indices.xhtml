@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="mid">
+                <p:panel header="Genetic Analysis">
+                    <h4>Load your File</h4>
+                    <p:growl id="msg" showDetail="true" />
+                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                        <p:fileUpload style="width: 500px" value="#{fileUploadManagedBean.file}" mode="advanced" 
+                                      fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" dragDropSupport="false"
+                                      update="msg" sizeLimit="1000000000" 
+                                      fileLimit="3" allowTypes="/(\.|\/)(doc|docx)$/">
+                        </p:fileUpload> 
+                    </h:panelGrid>
+                    <br/>
+                    <p:separator/>
+                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                        <p:outputLabel for="lista" value="Select Indices:" />
+
+                        <p:selectOneListbox id="lista" style="width: 300px"  value="#{mbIndices.option}">
+                            <f:selectItem itemLabel="TBK" itemValue="TBK" />
+                            <f:selectItem itemLabel="Wu-Palmer" itemValue="WP" />
+                            <f:selectItem itemLabel="Leacock-Chodorow" itemValue="LC" />
+                        </p:selectOneListbox>
+                        <p:commandButton value="Calculate indices" actionListener="#{mbPrueba.init()}" icon="ui-icon-calculator"/>
+                        
+                        <p:ajaxStatus style="display:block">
+                            <f:facet name="default">
+                                <h:outputText value="Status: StandBy" />
+                            </f:facet>
+
+                            <f:facet name="start">
+                                <h:outputText value="Status: Procesing..." />
+
+                            </f:facet>
+
+                            <f:facet name="complete">
+                                <h:outputText value="Status: Completed" />
+                            </f:facet>
+                        </p:ajaxStatus>
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage value="Recursos/ajax-loader.gif" />
+                        </p:dialog>
+
+                    </h:panelGrid>
+                    <p:separator/>
+                    <h4>Results</h4>
+                    <p:dataTable id="tbl1" value="Result" scrollable="true">
+                        <p:column headerText="Cluster">
+                        </p:column>
+
+                        <p:column headerText="TBK">
+                        </p:column>
+
+                        <p:column headerText="Wu-Palmer">
+                        </p:column>
+
+                        <p:column headerText="Leacock-Chodorow">
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+
+
+</html>
+
