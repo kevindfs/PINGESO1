@@ -21,38 +21,30 @@ import javax.inject.Named;
 @ManagedBean
 public class mbIndices {
 
-    private String[] indicesSelecionados;
-    private List<String> indices;
-    private Integer nroIndice;
+    private String option;
+    private Integer nroOpcion;
 
-    @PostConstruct
-    public void init() {
-        indices = new ArrayList<String>();
-        indices.add("TBK");
-        //indices.add("GS2");
-        indices.add("Wu-Palmer");
-        //indices.add("RESNIK");
-        //indices.add("LIN");
-        indices.add("LC");
-        //indices.add("JC");
+    public String getOption() {
+        return option;
     }
 
-    public String[] getIndicesSelecionados() {
-        return indicesSelecionados;
+    public void setOption(String option) {
+        this.option = option;
     }
 
-//    public Integer getNumeroIndice(List<String> s){
-//        return nroIndice;
-//    }
-    
-    public void setIndicesSelecionados(String[] indicesSelecionados) {
-        this.indicesSelecionados = indicesSelecionados;
-        System.out.println("indices seleccionados" + indicesSelecionados.toString());
-    }
-
-    public List<String> getIndices() {
-        //System.out.println("indices"+indices);
-        return indices;
+    public Integer opciones(String opc) {
+        if (null != opc) switch (opc) {
+            case "TBK":
+                nroOpcion = 0;
+                break;
+            case "WP":
+                nroOpcion = 1;
+                break;
+            case "LC":
+                nroOpcion = 2;
+                break;
+        }
+        return nroOpcion;
     }
 
     /**

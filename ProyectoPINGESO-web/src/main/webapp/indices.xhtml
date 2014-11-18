@@ -13,24 +13,48 @@
                 <p:panel header="Genetic Analysis">
                     <h4>Load your File</h4>
                     <p:growl id="msg" showDetail="true" />
-                    <p:fileUpload value="#{fileUploadManagedBean.file}" mode="advanced" 
-                                  fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" dragDropSupport="false"
-                                  update="msg" sizeLimit="1000000000" 
-                                  fileLimit="3" allowTypes="/(\.|\/)(doc|docx)$/"></p:fileUpload>
-                    <br/>
-                    <p:separator/>
-                    <br/>
                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
-                        <p:selectCheckboxMenu id="menuIndices" value="#{mbIndices.indicesSelecionados}" 
-                                              label="Select Indices" filter="true" 
-                                              filterMatchMode="startsWith" panelStyle="width:300px">
-                            <f:selectItems value="#{mbIndices.indices}" />
-                        </p:selectCheckboxMenu>
-                        <p:commandButton value="Calculate indices" icon="ui-icon-calculator"/>
+                        <p:fileUpload style="width: 500px" value="#{fileUploadManagedBean.file}" mode="advanced" 
+                                      fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" dragDropSupport="false"
+                                      update="msg" sizeLimit="1000000000" 
+                                      fileLimit="3" allowTypes="/(\.|\/)(doc|docx)$/">
+                        </p:fileUpload> 
                     </h:panelGrid>
                     <br/>
                     <p:separator/>
-                    <br/>
+                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                        <p:outputLabel for="lista" value="Select Indices:" />
+
+                        <p:selectOneListbox id="lista" style="width: 300px"  value="#{mbIndices.option}">
+                            <f:selectItem itemLabel="TBK" itemValue="TBK" />
+                            <f:selectItem itemLabel="Wu-Palmer" itemValue="WP" />
+                            <f:selectItem itemLabel="Leacock-Chodorow" itemValue="LC" />
+                        </p:selectOneListbox>
+                        <p:commandButton value="Calculate indices" actionListener="#{mbPrueba.init()}" icon="ui-icon-calculator"/>
+                        
+                        <p:ajaxStatus style="display:block">
+                            <f:facet name="default">
+                                <h:outputText value="Status: StandBy" />
+                            </f:facet>
+
+                            <f:facet name="start">
+                                <h:outputText value="Status: Procesing..." />
+
+                            </f:facet>
+
+                            <f:facet name="complete">
+                                <h:outputText value="Status: Completed" />
+                            </f:facet>
+                        </p:ajaxStatus>
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage value="Recursos/ajax-loader.gif" />
+                        </p:dialog>
+
+                    </h:panelGrid>
+                    <p:separator/>
+                    <h4>Results</h4>
                     <p:dataTable id="tbl1" value="Result" scrollable="true">
                         <p:column headerText="Cluster">
                         </p:column>

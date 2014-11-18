@@ -45,7 +45,7 @@ public class mbPrueba {
     @PostConstruct
     public void init() {
         genes.clear();
-        genes.add("AAC1");genes.add("AAC3");
+        genes.add("AAC1");genes.add("AAC1");
         float ListaGenes= procesamientoSB.CoreApp(genes, 1);
   }
     
