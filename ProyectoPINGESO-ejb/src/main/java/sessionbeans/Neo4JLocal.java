@@ -14,6 +14,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface Neo4JLocal {
+    
+    // Entrega la raiz de un grafo
+    int raiz();
+
     // Carga la base de datos del proyecto.
     // Recibe la ruta en la que se encuentra el archivo csv.
     // El formato para la ruta debe ser este: "file:c:/Users/alonso/Desktop/archivo.csv".
