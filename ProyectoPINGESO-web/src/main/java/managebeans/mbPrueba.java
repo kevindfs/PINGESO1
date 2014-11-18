@@ -13,7 +13,6 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import sessionbeans.ProcesamientoSBLocal;
-
 /**
  *
  * @author Kevin
@@ -45,12 +44,9 @@ public class mbPrueba {
     @PostConstruct
     public void init() {
         genes.clear();
-        genes.add("AAC1");genes.add("AAC1");
+        genes.add("gen1");genes.add("gen3");genes.add("gen2");
         float ListaGenes= procesamientoSB.CoreApp(genes, 1);
   }
-    
-    
-
     public mbPrueba() {
     }
     

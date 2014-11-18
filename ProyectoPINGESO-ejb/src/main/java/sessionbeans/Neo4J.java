@@ -35,11 +35,12 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
+    
     public int ancestroComunMinimo(int accessionUno, int accessionDos) {
-        if(accessionUno == 8150 || accessionDos == 8150)    return 8150;
-
-        if(accessionUno == accessionDos)    return accessionUno;
-
+        int raiz = 1;
+        if(accessionUno==raiz || accessionDos==raiz){
+            return 1;
+        }
         if(this.esPadre(accessionUno, accessionDos) ) {
             return accessionUno;
         }
@@ -143,7 +144,9 @@ public class Neo4J implements Neo4JLocal {
 
     @Override
     public int distancia(int accessionUno, int accessionDos) {
-        if(accessionUno == accessionDos)    return 0;
+        if (accessionDos == accessionUno){
+            return 0;
+        }
         String datoString, query = "MATCH (a: Term {accession: " + accessionUno + "}),(b: Term {accession: " + accessionDos + "}),p=a-[r:FATHER*..]->b RETURN reduce(distancia = -1, n IN nodes(p)| distancia + 1) AS reduction;";
         int i, datoEntero, largoLista, distancia;
         List<Integer> listaEnteros = new ArrayList<>();
@@ -163,7 +166,7 @@ public class Neo4J implements Neo4JLocal {
         // Se obtienen la distancia mínima
         i=1;
         distancia = listaEnteros.get(0);
-        System.out.println("Distancia 0:" + distancia);
+        //System.out.println("Distancia 0:" + distancia);
         while(i < largoLista) {
             if(listaEnteros.get(i) < distancia){
                 distancia = listaEnteros.get(i);
