@@ -17,6 +17,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.kernel.impl.util.StringLogger;
 import otrasclases.Maper;
+import otrasclases.ParTerminos;
 
 /**
  *
@@ -202,5 +203,36 @@ public class Neo4J implements Neo4JLocal {
         List<String> lista = new ArrayList<>(this.consulta("MATCH (n) WHERE NOT (n)<-[:FATHER]-() RETURN n.accession;"));
         root = Integer.parseInt(Maper.getString(lista.get(0)));
         return root;
+    }
+
+    @Override
+    public List<Integer> distancias(List<ParTerminos> _listaParTerminos) {
+        List<Integer> listaDistancias = new ArrayList<>();
+        String _query = "", dato;
+        
+        List<String> lista = new ArrayList<>();
+        graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
+        
+        ExecutionResult result;
+        Transaction transaction = graphDataService.beginTx();
+        ExecutionEngine engine = new ExecutionEngine(graphDataService, StringLogger.SYSTEM);
+        
+        try {
+            int i=0,largoLista = _listaParTerminos.size();
+            while (i < largoLista) {
+                _query = "MATCH (a: Term {accession: " + _listaParTerminos.get(i).getTermino1() + "}),(b: Term {accession: " + _listaParTerminos.get(i).getTermino2() + "}),p=a-[r:FATHER*..]->b RETURN length(p) LIMIT 1;";
+                result = engine.execute(_query);
+                dato = result.next().toString();
+                listaDistancias.add(Maper.getInt(dato));
+                i++;
+            }
+            
+        } finally {
+            transaction.finish();
+        }
+        
+        graphDataService.shutdown();
+        
+        return listaDistancias;
     }
 }
