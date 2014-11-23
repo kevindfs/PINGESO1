@@ -41,6 +41,9 @@ public class Neo4J implements Neo4JLocal {
         if(accessionUno==raiz || accessionDos==raiz){
             return 1;
         }
+        if (accessionDos == accessionUno){
+            return accessionDos;
+        }
         if(this.esPadre(accessionUno, accessionDos) ) {
             return accessionUno;
         }

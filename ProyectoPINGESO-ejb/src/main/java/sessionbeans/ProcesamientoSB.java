@@ -21,6 +21,16 @@ import javax.xml.registry.Query;
 @Stateless
 public class ProcesamientoSB implements ProcesamientoSBLocal {
     
+    private int contador;
+
+    public int getContador() {
+        return contador;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
+    }
+    
     @EJB
     private LeacockChodorowSBLocal leacockChodorowSB;
     
@@ -38,12 +48,10 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
     
     @Override
     public float CoreApp(List<String> genes, int opcion) {
-        //Si indice es 1 => Llamar a WuPalmer
-        //Si indice es 2 => LLamar a TBK
-        //Si indice es 3 => Llamar a Leacock-Chodorow
         float indiceWuPalmer=0;
         float indiceTBK = 0;
         float indiceLeacockChodorow = 0;
+        contador=0;
         int largoListaGenes=genes.size();
         System.out.println("Largo Lista Genes: "+ largoListaGenes);
         List<List<Integer>> matrizTerminos = new ArrayList<>();
@@ -75,12 +83,12 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
         int raiz = 1;
         int D1=0,D2=0,D3=0, idACM=raiz;
         /*@param D = Profundidad*/
-        int D = 5; 
+        int D = 5;
         Neo4J db = new Neo4J("C:\\Users\\Kevin\\Documents\\Neo4j\\Sp3db");
         for (int k = 0; k < largoListaPares; k++) {
             term1 = listaPares.get(k).getTermino1();
             term2 = listaPares.get(k).getTermino2();
-            System.out.println("Termino1: " +term1 +" Termino2: "+term2);
+            System.out.println("Par: " +(contador+1)+ "  Termino1: " +term1+"  Termino2: "+term2);
             idACM = db.ancestroComunMinimo(term1, term2);
             System.out.println("ACM: "+ idACM);
             D1 = db.distancia(idACM, term1);
@@ -89,32 +97,49 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
             System.out.println("D2: " + D2);
             D3 = db.distancia(raiz, idACM);
             System.out.println("D3: " + D3);
-            float wp = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
-            float lc = leacockChodorowSB.CalcularLeacockChodorow(D, D1, D2);
-            float tbk = tBKSB.calcularTBK(D1, D2, D3, 1);
-            indiceLeacockChodorow = indiceLeacockChodorow +lc;
-            indiceTBK = indiceTBK + tbk;
-            indiceWuPalmer = indiceWuPalmer + wp;
-            System.out.println("Wu Palmer:  "+ wp);
-            System.out.println("Leacock Chodorow:  "+ lc);
-            System.out.println("TBK:  "+ tbk);
+            if(opcion==0){
+                
+                float tbk = tBKSB.calcularTBK(D1, D2, D3, 1);
+                indiceTBK = indiceTBK + tbk;
+                System.out.println("TBK:  "+ tbk);
+                contador++;
+                if (contador == largoListaPares){
+                    float indiceTbkFinal = (indiceTBK/largoListaGenes);
+                    System.out.println("T.B.K. Final: " + indiceTbkFinal);
+                    return indiceTbkFinal;
+                }
+            }
+            if(opcion==1){
+                
+                float wp = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
+                indiceWuPalmer = indiceWuPalmer + wp;
+                System.out.println("Wu Palmer:  "+ wp);
+                contador++;
+                if (contador == largoListaPares){
+                    float indiceWuPalmerFinal = (indiceWuPalmer/largoListaPares);
+                    System.out.println("Wu Palmer Final: " + indiceWuPalmerFinal);
+                    return indiceWuPalmerFinal;
+                }
+            }
+            if (opcion==2){
+                
+                float lc = leacockChodorowSB.CalcularLeacockChodorow(D, D1, D2);
+                indiceLeacockChodorow = indiceLeacockChodorow +lc;
+                System.out.println("Leacock Chodorow:  "+ lc);
+                contador++;
+                if (contador == largoListaPares){
+                    float indiceLCFinal = (indiceLeacockChodorow/largoListaGenes);
+                    System.out.println("L.C. Final: " + indiceLCFinal);
+                    return indiceLCFinal;
+                }
+            }
         }
-        //int dist = db.distancia(8150, 1);
-        //System.out.println("idACM: "+ idACM);
-        //System.out.println("dist: "+ dist);
-        
         /*for (int k = 0; k < largoListaPares; k++) {
             //Imprimir los pares
             System.out.println(listaPares.get(k).getTermino1() + " : "+ listaPares.get(k).getTermino2());
         */
-        float indiceWuPalmerFinal = (indiceWuPalmer/largoListaPares);
-        float indiceLCFinal = (indiceLeacockChodorow/largoListaGenes);
-        float indiceTbkFinal = (indiceTBK/largoListaGenes);
-        System.out.println("Wu Palmer Final: " + indiceWuPalmerFinal);
-        System.out.println("L.C. Final: " + indiceLCFinal);
-        System.out.println("T.B.K. Final: " + indiceTbkFinal);
-        
-        return indiceWuPalmerFinal;
+        System.out.println("Retorno 0 - Final ");
+        return 0;
     }
 
     @Override
@@ -159,5 +184,4 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
         } 
         return numeroInvertido;
     }
-    
 }
