@@ -225,24 +225,8 @@ public class Neo4J implements Neo4JLocal {
                 result = engine.execute(_query);
                 dato = result.next().toString();
                 listaDistancias.add(Maper.getInt(dato));
-//                System.out.println(Maper.getInt(dato));
                 i++;
             }
-            
-            
-//            while (result.hasNext()) {
-//                lista.add(result.next().toString());
-//            }
-            
-//            _query = "MATCH (a: Term {accession: " + _lista.get(i).getTermino1() + "}),(b: Term {accession: " + _lista.get(i).getTermino2() + "}),p=a-[r:FATHER*..]->b RETURN length(p) LIMIT 1;";
-//            result = engine.execute(_query);
-//            System.out.println(result.next().toString());
-//
-//            i++;
-//            _query = "MATCH (a: Term {accession: " + _lista.get(i).getTermino1() + "}),(b: Term {accession: " + _lista.get(i).getTermino2() + "}),p=a-[r:FATHER*..]->b RETURN length(p) LIMIT 1;";
-//            result = engine.execute(_query);
-//            System.out.println(result.next().toString());
-//            transaction.success();
             
         } finally {
             transaction.finish();
