@@ -220,7 +220,6 @@ public class Neo4J implements Neo4JLocal {
         try {
             int i=0,largoLista = _listaParTerminos.size();
             while (i < largoLista) {
-                // MATCH (a: Term {accession: 1}),(b: Term {accession: 9}),p=a-[r:FATHER*..]->b RETURN length(p) LIMIT 1;
                 _query = "MATCH (a: Term {accession: " + _listaParTerminos.get(i).getTermino1() + "}),(b: Term {accession: " + _listaParTerminos.get(i).getTermino2() + "}),p=a-[r:FATHER*..]->b RETURN length(p) LIMIT 1;";
                 result = engine.execute(_query);
                 dato = result.next().toString();
