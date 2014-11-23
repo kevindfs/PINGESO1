@@ -72,6 +72,10 @@ public class mbIndices {
 
     public void opciones(String option) {
         System.out.println("Llamé al mbIndices ");
+        double timeStart, timeStop;
+        timeStart = System.currentTimeMillis();
+        System.out.println("tiempo de partida: "+timeStart);
+        
         if (null != option) switch (option) {
             case "TBK":
                 nroOpcion = 0;
@@ -104,6 +108,13 @@ public class mbIndices {
                 System.out.println("OutputIndice: "+ outputIndice);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Indice: ",Float.toString(outputIndice)));               
                 break;
+                
+                
         }
+        timeStop = System.currentTimeMillis();
+        System.out.println("Tiempo final: "+timeStop);
+        double tiempoSegundos = (timeStop-timeStart)*0.001;
+        System.out.println("Tiempo total: "+ tiempoSegundos+"segundos");
+        
     }
 }
