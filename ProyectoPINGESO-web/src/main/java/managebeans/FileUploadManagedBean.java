@@ -31,7 +31,16 @@ public class FileUploadManagedBean {
 
     UploadedFile file;
     public float output;
+    public boolean archivoCorrecto = false;
 
+    public boolean isArchivoCorrecto() {
+        return archivoCorrecto;
+    }
+
+    public void setArchivoCorrecto(boolean archivoCorrecto) {
+        this.archivoCorrecto = archivoCorrecto;
+    }
+    
     public float getOutput() {
         return output;
     }
@@ -74,7 +83,6 @@ public class FileUploadManagedBean {
             BufferedReader br = new BufferedReader(new InputStreamReader(input));
             nombreGen = new ArrayList<>();
             clusterUnico = new ArrayList<>();
-            boolean archivoCorrecto = false;
             while ((line = br.readLine()) != null) {
                 String linea[] = line.split(",");
                 if (linea.length == 2) {
@@ -94,7 +102,7 @@ public class FileUploadManagedBean {
             if (archivoCorrecto == true) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("File Upload Success"));
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Incorrect format file"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Incorrect Format File"));
             }
             String grupo;
             for (int i = 0; i < numeroCluster.size(); i++) {
@@ -132,8 +140,9 @@ public class FileUploadManagedBean {
     }
 
     public void calcularIndiceTBK() {
-        if (genesTotales.isEmpty()) {
+        if (genesTotales.isEmpty()| archivoCorrecto==false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("First Upload Your File"));
+            System.out.println("Entré al if");
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
                 //System.out.println("Cluster: " + genesTotales.get(i).getId());
@@ -145,7 +154,7 @@ public class FileUploadManagedBean {
     }
 
     public void calcularIndiceWp() {
-        if (genesTotales.isEmpty()) {
+        if (genesTotales.isEmpty()| archivoCorrecto==false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe Cargar un archivo"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
@@ -158,7 +167,7 @@ public class FileUploadManagedBean {
     }
 
     public void calcularIndiceLC() {
-        if (genesTotales.isEmpty()) {
+        if (genesTotales.isEmpty()|| archivoCorrecto==false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe Cargar un archivo"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
