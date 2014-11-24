@@ -16,12 +16,11 @@
                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
                         <p:fileUpload style="width: 500px" value="#{fileUploadManagedBean.file}" mode="advanced" 
                                       fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" dragDropSupport="false"
-                                      update="msg" sizeLimit="1000000000" 
-                                      fileLimit="3" allowTypes="/(\.|\/)(doc|docx)$/">
+                                      update="msg" sizeLimit="100000000" 
+                                      fileLimit="3" allowTypes="/(\.|\/)(txt|csv)$/">
                         </p:fileUpload> 
                     </h:panelGrid>
                     <br/>
-                    <p:separator/>
                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
                         <h:form>
                             <p:commandButton value="Calculate Wu Palmer" actionListener="#{mbIndices.opciones('WP')}" icon="ui-icon-calculator" update="resultado"/>
@@ -52,23 +51,25 @@
                         </p:dialog>
                     </h:panelGrid>
                     <p:separator/>
-                    <h4>Results</h4>
-                    <p:dataTable id="tbl1" value="Result" scrollable="true">
-                        <p:column headerText="Cluster">
-                        </p:column>
-                        <p:column headerText="TBK">
-                        </p:column>
-                        <p:column headerText="Wu-Palmer">
-                        </p:column>
-                        <p:column headerText="Leacock-Chodorow">
-                        </p:column>
-                    </p:dataTable>
+                    <h:panelGrid>
+                        <h:form>
+                            <p:inputTextarea rows="4" cols="28" />
+                            <br></br>
+                            <p:commandButton value="Calculate Wu Palmer" actionListener="#{mbIndices.opciones('WP')}" icon="ui-icon-calculator" update="resultado2"/>
+                            <br></br>
+                            <p:commandButton value="Calculate T.B.K." actionListener="#{mbIndices.opciones('TBK')}" icon="ui-icon-calculator" update="resultado2"/>
+                            <br></br>
+                            <p:commandButton value="Calculate Leacock Chodorow" actionListener="#{mbIndices.opciones('LC')}" icon="ui-icon-calculator" update= "resultado2" />
+                            <br></br>
+                            <br></br>
+                            <h:outputText value="Output:" />
+                            <br></br>
+                            <h:inputText id="resultado2" value="#{mbIndices.outputIndice}" />
+                        </h:form>
+                    </h:panelGrid>
                 </p:panel>
             </ui:define>
         </ui:composition>
     </h:body>
-
-
-
 </html>
 

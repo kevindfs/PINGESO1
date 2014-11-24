@@ -80,7 +80,8 @@ public class mbIndices {
                 genes.add("gen6");genes.add("gen7");
                 setOutputIndice(procesamientoSB.CoreApp(genes, nroOpcion));
                 System.out.println("OutputIndice: "+ outputIndice);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Indice: ",Float.toString(outputIndice)));
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: " +Float.toString(outputIndice));
+                addMessage(message);
                 break;
             case "WP":
                 nroOpcion = 1;
@@ -89,9 +90,8 @@ public class mbIndices {
                 genes.add("gen2");genes.add("gen3");
                 outputIndice = procesamientoSB.CoreApp(genes, nroOpcion);
                 System.out.println("OutputIndice: "+ outputIndice);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Indice: ",Float.toString(outputIndice)));
-                
-                        
+                FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: " +Float.toString(outputIndice));
+                addMessage(message1);
                 System.out.println("indice: "+Float.toString(outputIndice));
                 
                 break;
@@ -102,8 +102,12 @@ public class mbIndices {
                 genes.add("gen1");genes.add("gen2");
                 outputIndice = procesamientoSB.CoreApp(genes, nroOpcion);
                 System.out.println("OutputIndice: "+ outputIndice);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Indice: ",Float.toString(outputIndice)));               
+                FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: " +Float.toString(outputIndice));
+                addMessage(message2);
                 break;
         }
+    }
+    private void addMessage(FacesMessage message) {
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }
