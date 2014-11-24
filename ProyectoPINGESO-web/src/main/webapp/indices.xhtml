@@ -67,6 +67,18 @@
                             <h:inputText id="resultado2" value="#{mbIndices.outputIndice}" />
                         </h:form>
                     </h:panelGrid>
+                    <h:panelGrid>
+                        <h:form>
+                            <p:selectManyCheckbox id="checkboxes" value="#{fileUploadManagedBean.selectedOption}">
+                                <f:selectItem itemLabel="Wu Palmer" itemValue="WP"/>
+                                <f:selectItem itemLabel="Leacock Chodorow" itemValue="LC"/>
+                                <f:selectItem itemLabel="T.B.K." itemValue="TBK"/>
+                            </p:selectManyCheckbox>
+                            <p:commandButton value="Calculate Indices" actionListener="#{fileUploadManagedBean.calcularIndiceTBK()}" icon="ui-icon-calculator" update="resultado3"/>
+                            <br></br>
+                            <h:inputText id="resultado3" value="#{fileUploadManagedBean.output}" />
+                        </h:form>
+                    </h:panelGrid>
                 </p:panel>
             </ui:define>
         </ui:composition>

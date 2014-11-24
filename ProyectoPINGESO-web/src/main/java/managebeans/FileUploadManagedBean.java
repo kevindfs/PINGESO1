@@ -30,8 +30,17 @@ public class FileUploadManagedBean {
     private ProcesamientoSBLocal procesamientoSB;
 
     UploadedFile file;
-    public float output;
+    public float output=0;
     public boolean archivoCorrecto = false;
+    private String[] selectedOption; 
+
+    public String[] getSelectedOption() {
+        return selectedOption;
+    }
+
+    public void setSelectedOption(String[] selectedOption) {
+        this.selectedOption = selectedOption;
+    }
 
     public boolean isArchivoCorrecto() {
         return archivoCorrecto;
@@ -74,7 +83,7 @@ public class FileUploadManagedBean {
     ArrayList<cluster> genesTotales = new ArrayList<>();
 
     private String obtenerDatos(UploadedFile archivo) {
-
+        
         StringBuilder sb = new StringBuilder();
         String line;
 

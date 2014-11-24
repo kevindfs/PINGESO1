@@ -6,8 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Probando Bootstrap</title>
-
+        <title>Quality Indices Generator Based on GeneOntology</title>
         <!-- Optional theme -->
         <!--<h:link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>-->
 
@@ -17,38 +16,12 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
         <script src="Recursos/js/bootstrap.js" rel="stylesheet"></script>
         <script src="Recursos/js/bootstrap.min.js" rel="stylesheet"></script>
-
-
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
-       
-        <!--     <ul class="nav nav-tabs" role="tablist" id="myTab">
-          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-          <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-          <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-          <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-        </ul>
-        
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="home"></div>
-          <div role="tabpanel" class="tab-pane" id="profile"></div>
-          <div role="tabpanel" class="tab-pane" id="messages"></div>
-          <div role="tabpanel" class="tab-pane" id="settings"></div>
-        </div>
-        
-        <script>
-          $(function () {
-            $('#myTab a:last').tab('show')
-          })
-        </script>   
-        -->
-
-
-
+        <p:layout fullPage="true">
         <!--Inicio header-->    
-
         <div class="container-fluid fondoHeader3">
             <div class="navbar-header">
                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-collapse">
@@ -74,89 +47,46 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="lin.xhtml">Lin</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="jeanConrath.xhtml">Jean Conrath</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="resnik.xhtml">Resnik</a></li>
-
                         </ul>
                     </li>
                     <li class="dropdown">
-                        
                         <a id="drop2" href="#" class="dropdown-toggle whiteColor" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
                             <span><i class="glyphicon glyphicon-question-sign whiteColor"/></span> How to use
-                            
                         </a>
-                        
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li id="fat-menu" class="dropdown">
                         <a id="drop3" href="#" class="dropdown-toggle whiteColor" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false" >
                             <span><i class="glyphicon glyphicon-info-sign whiteColor"/></span> About us
-                         </a>
-                        
+                        </a>
                     </li>
                 </ul>
-            </div><!-- /.nav-collapse -->
+            </div>
         </div>
-
-
-
-
         <!--Fin header-->    
-       
+
         <!--Inicio contenido-->
         <div class="container fondoContenido">
             <div class="row">
                 <div class="col-lg-12" style="border-right: 1px #ccc solid;border-left: 1px #ccc solid;">
-                    
-                     <ui:insert name="cuerpo"> </ui:insert>
+                    <ui:insert name="cuerpo"> </ui:insert>
                     <div class="row">
                         <div class="col-lg-6 col-md-4 col-xs-0">
-                                    
-
-
-
-
-
-
-
-
-
-
-
-                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
-
-                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
-
-
-
+                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                         </div>
                     </div>    
                 </div>    
             </div>
         </div>
         <!--Fin contenido-->
-
-
-
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="Recursos/js/bootstrap.min.js"></script>
-
-        
-        
-        
-
-
-
+        </p:layout>
     </h:body>
     <footer style="border-top:1px #ccc solid">
         <br/><br/><br/><br/>        
-
     </footer>
-    <!--    <script src="Recursos/js/bootstrap.min.js" rel="stylesheet"></script>
-        <script src="Recursos/js/bootstrap.js" rel="stylesheet"></script>-->
 </html>
 

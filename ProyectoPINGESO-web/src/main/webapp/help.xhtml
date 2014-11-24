@@ -9,7 +9,17 @@
         <ui:composition template="./template.xhtml">
             <ui:define name="mid">
                 <p:panel header="Help" >
-                    Help
+                    <p:panel header="Genetic Analysis">
+                        <h4>Load your File</h4>
+                        <p:growl id="msg" showDetail="true" />
+                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                            <p:fileUpload style="width: 500px" value="#{fileUploadManagedBean.file}" mode="advanced" 
+                                          fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" dragDropSupport="false"
+                                          update="msg" sizeLimit="10485760" 
+                                          fileLimit="10" allowTypes="/(\.|\/)(txt|csv)$/">
+                            </p:fileUpload> 
+                        </h:panelGrid>
+                    </p:panel>
                 </p:panel>
             </ui:define>
         </ui:composition>
