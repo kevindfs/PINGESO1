@@ -48,6 +48,9 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
     
     @Override
     public float CoreApp(List<String> genes, int opcion) {
+        //opcion == 0 => TBK
+        //opcion == 1 => WuPalmer
+        //opcion == 2 => Leacock-Chodorow
         float indiceWuPalmer=0;
         float indiceTBK = 0;
         float indiceLeacockChodorow = 0;
@@ -84,7 +87,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
         int D1=0,D2=0,D3=0, idACM=raiz;
         /*@param D = Profundidad*/
         int D = 5;
-        Neo4J db = new Neo4J("C:\\Users\\Kevin\\Documents\\Neo4j\\Sp3db");
+        Neo4J db = new Neo4J("C:\\Users\\Kevin\\Documents\\Neo4j\\Sp3db2");
         for (int k = 0; k < largoListaPares; k++) {
             term1 = listaPares.get(k).getTermino1();
             term2 = listaPares.get(k).getTermino2();
