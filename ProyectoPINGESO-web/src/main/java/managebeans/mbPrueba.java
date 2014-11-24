@@ -44,8 +44,9 @@ public class mbPrueba {
     @PostConstruct
     public void init() {
         genes.clear();
-        genes.add("gen1");genes.add("gen3");genes.add("gen2");
+        genes.add("gen1");genes.add("gen2");genes.add("gen3");
         float ListaGenes= procesamientoSB.CoreApp(genes, 1);
+        
   }
     public mbPrueba() {
     }

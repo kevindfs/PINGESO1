@@ -7,6 +7,7 @@ package sessionbeans;
 
 import java.util.List;
 import javax.ejb.Local;
+import otrasclases.ParTerminos;
 
 /**
  *
@@ -14,6 +15,12 @@ import javax.ejb.Local;
  */
 @Local
 public interface Neo4JLocal {
+    // Optimizacion de los ancestros comunes minimos
+    List<Integer> ancestrosComunesMinimos(List<ParTerminos> _listaParTerminos);
+    
+    // Retorna las distancias. Corta.
+    // No sirve de mucho tal como esta. hay que cambiar la clase ParTerminos. Corta
+    List<Integer> distancias(List<ParTerminos> _listaParTerminos);
     
     // Entrega la raiz de un grafo
     int raiz();
