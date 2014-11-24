@@ -11,7 +11,7 @@ import otrasclases.ParTerminos;
 
 /**
  *
- * @author Alonso Salinas
+ * @author alonso
  */
 @Local
 public interface Neo4JLocal {

@@ -274,7 +274,6 @@ public class Neo4J implements Neo4JLocal {
                     _query = "MATCH (a: Term {accession: " + _listaParTerminos.get(i).getTermino1() +"}),(b: Term {accession: " + _listaParTerminos.get(i).getTermino2() +"}),p=a<-[r:FATHER*..]-c-[r:FATHER*..]->b RETURN c.accession LIMIT 1;";
                     result = engine.execute(_query);
                     dato = result.next().toString();
-                    
                     listaDistancias.add(Maper.getInt(dato));
                 }
                 
