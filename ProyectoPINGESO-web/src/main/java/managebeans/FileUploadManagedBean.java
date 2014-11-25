@@ -30,9 +30,9 @@ public class FileUploadManagedBean {
     private ProcesamientoSBLocal procesamientoSB;
 
     UploadedFile file;
-    public float output=0;
+    public float output = 0;
     public boolean archivoCorrecto = false;
-    private String[] selectedOption; 
+    private String[] selectedOption;
 
     public String[] getSelectedOption() {
         return selectedOption;
@@ -49,7 +49,7 @@ public class FileUploadManagedBean {
     public void setArchivoCorrecto(boolean archivoCorrecto) {
         this.archivoCorrecto = archivoCorrecto;
     }
-    
+
     public float getOutput() {
         return output;
     }
@@ -83,7 +83,7 @@ public class FileUploadManagedBean {
     ArrayList<cluster> genesTotales = new ArrayList<>();
 
     private String obtenerDatos(UploadedFile archivo) {
-        
+
         StringBuilder sb = new StringBuilder();
         String line;
 
@@ -149,21 +149,21 @@ public class FileUploadManagedBean {
     }
 
     public void calcularIndiceTBK() {
-        if (genesTotales.isEmpty()| archivoCorrecto==false) {
+        if (genesTotales.isEmpty() | archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("First Upload Your File"));
             System.out.println("Entré al if");
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
                 //System.out.println("Cluster: " + genesTotales.get(i).getId());
-                    float proc;
-                    proc = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 0);
-                    output = proc;
+                float proc;
+                proc = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 0);
+                output = proc;
             }
         }
     }
 
     public void calcularIndiceWp() {
-        if (genesTotales.isEmpty()| archivoCorrecto==false) {
+        if (genesTotales.isEmpty() | archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe Cargar un archivo"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
@@ -176,14 +176,41 @@ public class FileUploadManagedBean {
     }
 
     public void calcularIndiceLC() {
-        if (genesTotales.isEmpty()|| archivoCorrecto==false) {
+        if (genesTotales.isEmpty() || archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe Cargar un archivo"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
                 //System.out.println("Cluster: " + genesTotales.get(i).getId());
-                    float proc;
-                    proc = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2);
-                    output = proc;
+                float proc;
+                proc = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2);
+                output = proc;
+            }
+        }
+    }
+
+    public void mostrarValores() {
+        System.out.println("Indices a calcular: ");
+        for (int i = 0; i < selectedOption.length; i++) {
+            if (selectedOption[i].equals("WP")) {
+                System.out.println("Wu Palmer");
+                calcularIndiceWp();
+            }
+            if (selectedOption[i].equals("LC")) {
+                System.out.println("Leacock Chodorow");
+                calcularIndiceLC();
+            }
+            if (selectedOption[i].equals("JC")) {
+                System.out.println("Jean Conrath");
+            }
+            if (selectedOption[i].equals("TBK")) {
+                System.out.println("T.B.K.");
+                calcularIndiceTBK();
+            }
+            if (selectedOption[i].equals("L")) {
+                System.out.println("Lin");
+            }
+            if (selectedOption[i].equals("R")) {
+                System.out.println("Resnik");
             }
         }
     }

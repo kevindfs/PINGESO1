@@ -20,10 +20,6 @@
                                       fileLimit="10" allowTypes="/(\.|\/)(txt|csv)$/">
                         </p:fileUpload> 
                     </h:panelGrid>
-                    <p:commandButton value="Calculate T.B.K." actionListener="#{fileUploadManagedBean.calcularIndiceTBK()}" icon="ui-icon-calculator" update="resultado"/>
-                    <br></br><br></br>
-                    <h:inputText id="resultado" value="#{fileUploadManagedBean.output}" />
-                    <br></br>
                     <p:ajaxStatus style="display:block">
                         <f:facet name="default">
                             <h:outputText value="Status: StandBy" />
@@ -39,6 +35,16 @@
                     <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                         <p:graphicImage value="Recursos/ajax-loader.gif" />
                     </p:dialog>
+                    <h:form>
+                        <br></br>
+                        <p:selectManyCheckbox id="checkboxes" value="#{fileUploadManagedBean.selectedOption}" layout="grid" columns="5">
+                            <f:selectItem itemLabel="Wu Palmer" itemValue="WP"/>
+                            <f:selectItem itemLabel="Leacock Chodorow" itemValue="LC"/>
+                            <f:selectItem itemLabel="T.B.K." itemValue="TBK"/>
+                        </p:selectManyCheckbox>
+                        <br></br><br></br>
+                        <p:commandButton value="Calculate Indices"  actionListener="#{fileUploadManagedBean.mostrarValores()}" icon="ui-icon-check" />
+                    </h:form>
                 </p:panel>
             </ui:define>
         </ui:composition>
