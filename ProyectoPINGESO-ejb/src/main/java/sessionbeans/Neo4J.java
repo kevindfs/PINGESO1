@@ -127,7 +127,7 @@ public class Neo4J implements Neo4JLocal {
     @Override
     public void cargaBaseDeDatos(String ruta) {
         this.creaIndice();
-        String query = "";
+        String query;
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
         
         ExecutionResult result;
@@ -302,7 +302,7 @@ public class Neo4J implements Neo4JLocal {
         // Se obtiene la frecuencia del término.
         // La frecuencia es numero de descendientes de un termino + 1.
         consultaFrecuencia = this.consulta(queryFrecuencia);
-        if(consultaFrecuencia.size() == 0) frecuencia = 1;
+        if(consultaFrecuencia.isEmpty()) frecuencia = 1;
 
         else {
             frecuencia = Maper.getInt(this.consulta(queryFrecuencia).get(0));
