@@ -288,4 +288,33 @@ public class Neo4J implements Neo4JLocal {
         
         return listaDistancias;
     }
+
+    @Override
+    public float probabilidad(int _accessionTermino) {
+        int raiz = this.raiz();
+        float frecuencia, numeroNodos, probabilidad;
+        String queryFrecuencia, queryNumeroNodos;
+        List<String> consultaFrecuencia, consultaNumeroNodos;
+
+        queryFrecuencia = "MATCH (a: Term {accession: " + _accessionTermino + "}), (a)-[:FATHER*..]->(b) RETURN count(DISTINCT b.accession)+1";
+        queryNumeroNodos = "MATCH (n: Term) RETURN count(DISTINCT n)";
+        
+        // Se obtiene la frecuencia del término.
+        // La frecuencia es numero de descendientes de un termino + 1.
+        consultaFrecuencia = this.consulta(queryFrecuencia);
+        if(consultaFrecuencia.size() == 0) frecuencia = 1;
+
+        else {
+            frecuencia = Maper.getInt(this.consulta(queryFrecuencia).get(0));
+        }
+        
+        // Se obtienen el número de nodos del grafo.
+        numeroNodos = Maper.getInt(this.consulta(queryNumeroNodos).get(0));
+
+        // Con la frecuencia del término y el número de nodos se obtiene la 
+        // probabilidad.
+        probabilidad = frecuencia/numeroNodos;
+
+        return probabilidad;
+    }
 }
