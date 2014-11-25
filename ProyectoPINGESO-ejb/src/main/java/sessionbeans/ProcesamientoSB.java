@@ -88,7 +88,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
         int D1 = 0, D2 = 0, D3 = 0, idACM = raiz;
         /*@param D = Profundidad*/
         int D = 5;
-        
+        System.out.println("asd");    
         for (int k = 0; k < largoListaPares; k++) {
             term1 = listaPares.get(k).getTermino1();
             term2 = listaPares.get(k).getTermino2();
