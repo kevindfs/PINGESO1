@@ -15,6 +15,10 @@ import otrasclases.ParTerminos;
  */
 @Local
 public interface Neo4JLocal {
+    
+    // Obtiene la probabilidad de un nodo.
+    float probabilidad(int _accessionTermino);
+    
     // Optimizacion de los ancestros comunes minimos
     List<Integer> ancestrosComunesMinimos(List<ParTerminos> _listaParTerminos);
     
