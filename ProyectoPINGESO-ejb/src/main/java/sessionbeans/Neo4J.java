@@ -350,6 +350,22 @@ public class Neo4J implements Neo4JLocal {
 
     @Override
     public int profundidad() {
-        return 1;
+        int raiz = this.raiz(), i,largoLista, profundidad, temporal;
+        List<String> lista;
+        
+        lista = new ArrayList<>(this.consulta("MATCH (r: Term {accession: " + raiz + "}),(h: Term),p=(r)-[:FATHER*..]->(h)-[:FATHER]->() RETURN DISTINCT length(p)+1"));
+        largoLista = lista.size();
+        profundidad = 0;
+
+        i=0;
+        while (i < largoLista) {
+            temporal = Maper.getInt(lista.get(i));
+            if (temporal > profundidad) {
+                profundidad = temporal;
+            }
+            System.out.println("Temporal = " + temporal);
+            i++;
+        }
+        return profundidad;
     }
 }
