@@ -16,6 +16,11 @@ import otrasclases.ParTerminos;
 @Local
 public interface Neo4JLocal {
     
+    // Método Lambda.
+    // 0 en la misma jerarquia.
+    // 1 en la misma vecindad.
+    int lambda(int _accessionTerminoUno, int _accessionTerminoDos);
+    
     // Recibe dos accession y retorna true si uno es ancestro del otro, retorna
     // false en otro caso.
     boolean esAncestro(int _accessionTerminoUno, int _accessionTerminoDos);
