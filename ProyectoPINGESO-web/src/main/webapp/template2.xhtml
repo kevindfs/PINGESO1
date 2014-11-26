@@ -10,83 +10,120 @@
         <!-- Optional theme -->
         <!--<h:link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>-->
 
-        <link href="Recursos/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="Recursos/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="Recursos/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
-        <link href="Recursos/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+        <!--<link href="Recursos/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />-->
+        <!--<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>-->
         <script src="Recursos/js/bootstrap.js" rel="stylesheet"></script>
         <script src="Recursos/js/bootstrap.min.js" rel="stylesheet"></script>
         <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+
     </h:head>
     <h:body>
-        <p:layout fullPage="true">
-        <!--Inicio header-->    
-        <div class="container-fluid fondoHeader3">
-            <div class="navbar-header">
-                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand whiteColor" href="home2.xhtml" ><i class="glyphicon glyphicon-home"/></a>
-            </div>
-            <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a id="drop1" href="#" class="dropdown-toggle whiteColor" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                            Biological Indices
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="wupalmer.xhtml">Wu Palmer</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="tbk.xhtml">TBK</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="leacockChodorow.xhtml">Leacock-Chodorow</a></li>
-                            <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="lin.xhtml">Lin</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="jeanConrath.xhtml">Jean Conrath</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="resnik.xhtml">Resnik</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a id="drop2" href="#" class="dropdown-toggle whiteColor" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                            <span><i class="glyphicon glyphicon-question-sign whiteColor"/></span> How to use
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li id="fat-menu" class="dropdown">
-                        <a id="drop3" href="#" class="dropdown-toggle whiteColor" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false" >
-                            <span><i class="glyphicon glyphicon-info-sign whiteColor"/></span> About us
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!--Fin header-->    
+        <h:outputScript library="primefaces" name="jquery/jquery.js" />
 
-        <!--Inicio contenido-->
-        <div class="container fondoContenido">
-            <div class="row">
-                <div class="col-lg-12" style="border-right: 1px #ccc solid;border-left: 1px #ccc solid;">
-                    <ui:insert name="cuerpo"> </ui:insert>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-4 col-xs-0">
-                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <h:form>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="center" >          
+
+                    <!--Inicio header-->    
+                    <div class="container-fluid fondoHeader3 navbar-fixed-top">
+                        <div class="navbar-header">
+                            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand whiteColor" href="home2.xhtml" style="color:#fff;"><i class="glyphicon glyphicon-home"/></a>
                         </div>
-                    </div>    
-                </div>    
-            </div>
-        </div>
-        <!--Fin contenido-->
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="Recursos/js/bootstrap.min.js"></script>
-        </p:layout>
+                        <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a id="drop1" href="#" class="dropdown-toggle whiteColor" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false" style="color:#fff;">
+                                        Biological Indices
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="wupalmer.xhtml">Wu Palmer</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="tbk.xhtml">TBK</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="leacockChodorow.xhtml">Leacock-Chodorow</a></li>
+                                        <li role="presentation" class="divider"></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="lin.xhtml">Lin</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="jeanConrath.xhtml">Jean Conrath</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="resnik.xhtml">Resnik</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a id="drop2" href="#" class="dropdown-toggle whiteColor" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false" style="color:#fff;">
+                                        <span><i class="glyphicon glyphicon-question-sign whiteColor"/></span> How to use
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li id="fat-menu" class="dropdown">
+                                    <a id="drop3" href="#" class="dropdown-toggle whiteColor" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false" style="color:#fff;">
+                                        <span><i class="glyphicon glyphicon-info-sign whiteColor"/></span> About us
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--Fin header-->    
+
+                    <!--Inicio contenido-->
+                    <div class="container fondoContenido tam_min" style="min-height: 900px;">
+                        <div class="row">
+                            <div class="col-lg-12" style="border-right: 1px #ccc solid;border-left: 1px #ccc solid;">
+<br/><br/>
+                                <ui:insert name="cuerpo"> </ui:insert>
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-4 col-xs-0">
+                                        
+                                    </div>
+                                </div>    
+                            </div>    
+                        </div>
+                    </div>
+                    <!--Fin contenido-->
+
+
+                    
+                    
+
+
+
+
+
+
+
+                    <footer style="border-top:1px #ccc solid">
+                        <br/><br/><br/><br/>
+                    </footer>
+
+                    
+                    
+
+                    <script src="Recursos/js/bootstrap.js" rel="stylesheet"></script>
+
+
+
+
+
+
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+
+
+        </h:form>
+
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+        <!--<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>-->
     </h:body>
-    <footer style="border-top:1px #ccc solid">
-        <br/><br/><br/><br/>        
-    </footer>
 </html>
 
