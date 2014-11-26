@@ -93,11 +93,6 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public int profundidad(int idNodo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<String> consulta(String _query) {
         List<String> lista = new ArrayList<>();
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
