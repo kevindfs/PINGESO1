@@ -16,10 +16,8 @@ import javax.inject.Named;
 import sessionbeans.ProcesamientoSBLocal;
 /**
  *
- * @author Italo
+ * @author Kevin
  */
-
-
 @Named(value = "mbIndices")
 @Dependent
 @ManagedBean
@@ -41,13 +39,13 @@ public class mbIndices {
     
     private String option;
     private Integer nroOpcion;
-    private float outputIndice;
+    private String outputIndice;
 
-    public float getOutputIndice() {
+    public String getOutputIndice() {
         return outputIndice;
     }
 
-    public void setOutputIndice(float outputIndice) {
+    public void setOutputIndice(String outputIndice) {
         this.outputIndice = outputIndice;
     }
 
@@ -82,9 +80,10 @@ public class mbIndices {
                 System.out.println("Opcion TBK:" + nroOpcion);
                 genes.clear();
                 genes.add("gen6");genes.add("gen7");
-                setOutputIndice(procesamientoSB.CoreApp(genes, nroOpcion));
+                //El 1 corresponde a cluster1
+                setOutputIndice(procesamientoSB.CoreApp(genes, nroOpcion, 1));
                 System.out.println("OutputIndice: "+ outputIndice);
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: " +Float.toString(outputIndice));
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: " + outputIndice);
                 addMessage(message);
                 break;
             case "WP":
@@ -92,11 +91,12 @@ public class mbIndices {
                 System.out.println("Opcion WP:" + nroOpcion);
                 genes.clear();
                 genes.add("gen2");genes.add("gen3");
-                outputIndice = procesamientoSB.CoreApp(genes, nroOpcion);
+                //El 1 corresponde a cluster 1
+                outputIndice = procesamientoSB.CoreApp(genes, nroOpcion,1);
                 System.out.println("OutputIndice: "+ outputIndice);
-                FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: " +Float.toString(outputIndice));
+                FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: "+ outputIndice);
                 addMessage(message1);
-                System.out.println("indice: "+Float.toString(outputIndice));
+                System.out.println(outputIndice);
                 
                 break;
             case "LC":
@@ -104,9 +104,10 @@ public class mbIndices {
                 System.out.println("Opcion LC:" + nroOpcion);
                 genes.clear();
                 genes.add("gen1");genes.add("gen2");
-                outputIndice = procesamientoSB.CoreApp(genes, nroOpcion);
+                //El 1 corresponde a cluster1
+                outputIndice = procesamientoSB.CoreApp(genes, nroOpcion,1);
                 System.out.println("OutputIndice: "+ outputIndice);
-                FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: " +Float.toString(outputIndice));
+                FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_INFO, "TITULO", "Info: " +outputIndice);
                 addMessage(message2);
                 break;
                 

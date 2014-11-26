@@ -45,7 +45,8 @@ public class mbPrueba {
     public void init() {
         genes.clear();
         genes.add("gen1");genes.add("gen2");genes.add("gen3");
-        float ListaGenes= procesamientoSB.CoreApp(genes, 1);
+        String salida;
+        salida = procesamientoSB.CoreApp(genes, 1,1);
         
   }
     public mbPrueba() {

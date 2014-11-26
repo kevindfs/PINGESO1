@@ -48,7 +48,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
     }
 
     @Override
-    public float CoreApp(List<String> genes, int opcion) {
+    public String CoreApp(List<String> genes, int opcion, int cluster) {
         //opcion == 0 => TBK
         //opcion == 1 => WuPalmer
         //opcion == 2 => Leacock-Chodorow
@@ -109,7 +109,8 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 if (contador == largoListaPares) {
                     float indiceTbkFinal = (indiceTBK / largoListaGenes);
                     System.out.println("T.B.K. Final: " + indiceTbkFinal);
-                    return indiceTbkFinal;
+                    String salida = Float.toString(indiceTbkFinal) + ", "+ cluster;
+                    return salida;
                 }
             }
             if (opcion == 1) {
@@ -121,7 +122,8 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 if (contador == largoListaPares) {
                     float indiceWuPalmerFinal = (indiceWuPalmer / largoListaPares);
                     System.out.println("Wu Palmer Final: " + indiceWuPalmerFinal);
-                    return indiceWuPalmerFinal;
+                    String salida = Float.toString(indiceWuPalmerFinal) + ", "+ cluster;
+                    return salida;
                 }
             }
             if (opcion == 2) {
@@ -133,7 +135,8 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 if (contador == largoListaPares) {
                     float indiceLCFinal = (indiceLeacockChodorow / largoListaGenes);
                     System.out.println("L.C. Final: " + indiceLCFinal);
-                    return indiceLCFinal;
+                    String salida = Float.toString(indiceLCFinal) + ", "+ cluster;
+                    return salida;
                 }
             }
         }
@@ -141,8 +144,8 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
          //Imprimir los pares
          System.out.println(listaPares.get(k).getTermino1() + " : "+ listaPares.get(k).getTermino2());
          */
-        System.out.println("Retorno 0 - Final ");
-        return 0;
+        System.out.println("Retorno Final ");
+        return "False";
     }
 
     @Override

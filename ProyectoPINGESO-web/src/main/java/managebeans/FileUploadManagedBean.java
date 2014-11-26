@@ -30,7 +30,7 @@ public class FileUploadManagedBean {
     private ProcesamientoSBLocal procesamientoSB;
 
     UploadedFile file;
-    public float output = 0;
+    public String output = "";
     public boolean archivoCorrecto = false;
     private String[] selectedOption;
 
@@ -50,11 +50,11 @@ public class FileUploadManagedBean {
         this.archivoCorrecto = archivoCorrecto;
     }
 
-    public float getOutput() {
+    public String getOutput() {
         return output;
     }
 
-    public void setOutput(float output) {
+    public void setOutput(String output) {
         this.output = output;
     }
 
@@ -155,9 +155,8 @@ public class FileUploadManagedBean {
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
                 //System.out.println("Cluster: " + genesTotales.get(i).getId());
-                float proc;
-                proc = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 0);
-                output = proc;
+                //Lista de genes,indiceCalcular,Cluster
+                String output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2, genesTotales.get(i).getId());
             }
         }
     }
@@ -168,9 +167,9 @@ public class FileUploadManagedBean {
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
                 //System.out.println("Cluster: " + genesTotales.get(i).getId());
-                float proc;
-                proc = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 1);
-                output = proc;
+                //Lista de genes,indiceCalcular,Cluster
+                String output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2, genesTotales.get(i).getId());
+                
             }
         }
     }
@@ -181,9 +180,9 @@ public class FileUploadManagedBean {
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
                 //System.out.println("Cluster: " + genesTotales.get(i).getId());
-                float proc;
-                proc = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2);
-                output = proc;
+                //Lista de genes,indiceCalcular,Cluster;
+                String output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2, genesTotales.get(i).getId());
+                
             }
         }
     }
