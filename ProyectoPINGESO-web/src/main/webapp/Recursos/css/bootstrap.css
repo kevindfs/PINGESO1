@@ -43,8 +43,8 @@
     /*background-color: #cc9900;*/
     color: #204d74;
     background: -webkit-linear-gradient(#204d74, black);
-    background: -moz-linear-gradient(#204d74, grey);
-    background: -o-linear-gradient(#204d74, grey);
+    background: -moz-linear-gradient(#204d74, black);
+    background: -o-linear-gradient(#204d74, black);
 
     
 }
@@ -76,8 +76,8 @@
 
 footer{
     background: -webkit-linear-gradient(#204d74, black);
-    background: -moz-linear-gradient(#204d74, grey);
-    background: -o-linear-gradient(#204d74, grey);
+    background: -moz-linear-gradient(#204d74, black);
+    background: -o-linear-gradient(#204d74, black);
     color: #fff;    
     margin-bottom: 0px;
     margin-right: 0px;
