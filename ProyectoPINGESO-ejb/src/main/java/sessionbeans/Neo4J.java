@@ -329,4 +329,27 @@ public class Neo4J implements Neo4JLocal {
         }
         return false;
     }
+
+    @Override
+    public int lambda(int _accessionTerminoUno, int _accessionTerminoDos) {
+        int raiz = this.raiz(), numero, distanciaUno, distanciaDos;
+        
+        // Si el accession del término uno es igual al accession
+        // del término dos, misma jerarquía.
+        if (_accessionTerminoUno == _accessionTerminoDos) {
+            return 0;
+        }
+        
+        // Se obtienen las distancias desde la raiz a los términos.
+        distanciaUno = Maper.getInt(this.consulta("MATCH (a: Term {accession: " + _accessionTerminoUno + "}),(raiz: Term {accession: " + raiz +"}),p=(raiz)-[:FATHER*..]->(a) RETURN length(p) LIMIT 1").get(0));
+        distanciaDos = Maper.getInt(this.consulta("MATCH (b: Term {accession: " + _accessionTerminoDos + "}),(raiz: Term {accession: " + raiz +"}),p=(raiz)-[:FATHER*..]->(b) RETURN length(p) LIMIT 1").get(0));
+        
+        // Si las distancias son iguales, misma jerarquía.
+        if (distanciaUno == distanciaDos) {
+            return 0;
+        }
+        
+        // Si no es la misma jerarquía, entonces es la misma vecindad
+        return 1;
+    }
 }
