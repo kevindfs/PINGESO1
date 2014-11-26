@@ -74,26 +74,33 @@
 
 
 
-footer{
+#footer{
     background: -webkit-linear-gradient(#204d74, black);
     background: -moz-linear-gradient(#204d74, black);
     background: -o-linear-gradient(#204d74, black);
-    color: #fff;    
-    margin-bottom: 0px;
-    margin-right: 0px;
-    margin-left: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    
-    
-    
+    color: #fff;     
 }
+
+
 
 .tam_min{
     min-height: 1800 px;
     
 }
+
+
+.centro{
+    text-align: center;    
+}
+.izquierda{
+    text-align:left;   
+    
+}
+
+.derecha{
+    text-align:right;    
+}
+
 
 
 /*
