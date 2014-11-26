@@ -15,6 +15,8 @@ import otrasclases.ParTerminos;
  */
 @Local
 public interface Neo4JLocal {
+    // Entrega la profundidad del arbol
+    int profundidad();
     
     // Método Lambda.
     // 0 en la misma jerarquia.

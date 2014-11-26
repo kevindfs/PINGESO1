@@ -347,4 +347,9 @@ public class Neo4J implements Neo4JLocal {
         // Si no es la misma jerarquía, entonces es la misma vecindad
         return 1;
     }
+
+    @Override
+    public int profundidad() {
+        return 1;
+    }
 }
