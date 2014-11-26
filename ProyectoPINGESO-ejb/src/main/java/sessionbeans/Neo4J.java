@@ -352,4 +352,38 @@ public class Neo4J implements Neo4JLocal {
         // Si no es la misma jerarquía, entonces es la misma vecindad
         return 1;
     }
+
+    @Override
+    public int profundidad() {
+        int i, raiz = this.raiz(), largoListaStrings, largoListaEnteros, profundidadParcial, profundidadFinal;
+        String query;
+        List<String> listaStrings, lista;
+        List<Integer> listaEnteros = new ArrayList<>();
+        
+        lista = new ArrayList<>(this.consulta("MATCH (n: Profundidad) RETURN n.valor"));
+
+        if (lista.size() > 0) {
+            profundidadFinal  = Maper.getInt(lista.get(0));
+            return profundidadFinal;
+        }
+        
+        else  {
+            query = "MATCH (r: Term {accession: " + raiz + "}),(h: Term),p=(r)-[:FATHER*..]->(h)-[:FATHER]->() RETURN DISTINCT length(p)+1";
+            listaStrings = new ArrayList<>(this.consulta(query));
+            largoListaStrings = listaStrings.size();
+        
+            profundidadFinal = 0;
+            i=0;
+            while (i < largoListaStrings) {
+                profundidadParcial = Maper.getInt(listaStrings.get(i));
+                if (profundidadParcial > profundidadFinal) {
+                    profundidadFinal = profundidadParcial;
+                }
+                i++;
+            }
+            this.consulta("CREATE (p: Profundidad {valor: " + profundidadFinal + "})");
+        }
+        
+        return profundidadFinal;
+    }
 }
