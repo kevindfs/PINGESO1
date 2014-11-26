@@ -317,4 +317,16 @@ public class Neo4J implements Neo4JLocal {
 
         return probabilidad;
     }
+
+    @Override
+    public boolean esAncestro(int _accessionTerminoUno, int _accessionTerminoDos) {
+        if(_accessionTerminoUno == _accessionTerminoDos)    return true;
+
+        if (this.consulta("MATCH (a: Term {accession: " + _accessionTerminoUno + "}),(b: Term {accession: " + _accessionTerminoDos +"}),p=(a)-[relacion:FATHER*..]->(b) RETURN p LIMIT 1").size() > 0)  return true;
+
+        else if (this.consulta("MATCH (a: Term {accession: " + _accessionTerminoDos + "}),(b: Term {accession: " + _accessionTerminoUno +"}),p=(a)-[relacion:FATHER*..]->(b) RETURN p LIMIT 1").size() > 0) {
+            return true;
+        }
+        return false;
+    }
 }
