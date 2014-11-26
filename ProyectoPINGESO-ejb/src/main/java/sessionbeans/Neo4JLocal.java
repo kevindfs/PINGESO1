@@ -16,6 +16,10 @@ import otrasclases.ParTerminos;
 @Local
 public interface Neo4JLocal {
     
+    // Recibe dos accession y retorna true si uno es ancestro del otro, retorna
+    // false en otro caso.
+    boolean esAncestro(int _accessionTerminoUno, int _accessionTerminoDos);
+    
     // Obtiene la probabilidad de un nodo.
     float probabilidad(int _accessionTermino);
     
