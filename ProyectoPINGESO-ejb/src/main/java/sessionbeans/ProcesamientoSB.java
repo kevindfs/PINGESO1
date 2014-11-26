@@ -84,7 +84,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
         int term1, term2;
         System.out.println("Cantidad Pares a consultar:" + largoListaPares);
         /*@param raiz = raiz del arbol*/
-        int raiz = 1;
+        int raiz = 8150;
         int D1 = 0, D2 = 0, D3 = 0, idACM = raiz;
         /*@param D = Profundidad*/
         int D = 5;
