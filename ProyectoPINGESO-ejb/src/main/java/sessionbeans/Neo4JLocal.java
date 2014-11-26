@@ -15,9 +15,7 @@ import otrasclases.ParTerminos;
  */
 @Local
 public interface Neo4JLocal {
-    // Obtiene la profundidad del grafo.
-    int profundidad();
-
+    
     // Método Lambda.
     // 0 en la misma jerarquia.
     // 1 en la misma vecindad.

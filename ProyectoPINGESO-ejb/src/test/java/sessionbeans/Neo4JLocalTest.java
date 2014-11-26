@@ -352,11 +352,6 @@ public class Neo4JLocalTest {
         public int lambda(int _accessionTerminoUno, int _accessionTerminoDos) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-
-        @Override
-        public int profundidad() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
     }
     
 }
