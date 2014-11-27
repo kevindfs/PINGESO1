@@ -93,11 +93,6 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public int profundidad(int idNodo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<String> consulta(String _query) {
         List<String> lista = new ArrayList<>();
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
@@ -351,5 +346,26 @@ public class Neo4J implements Neo4JLocal {
         
         // Si no es la misma jerarquía, entonces es la misma vecindad
         return 1;
+    }
+
+    @Override
+    public int profundidad() {
+        int raiz = this.raiz(), i,largoLista, profundidad, temporal;
+        List<String> lista;
+        
+        lista = new ArrayList<>(this.consulta("MATCH (r: Term {accession: " + raiz + "}),(h: Term),p=(r)-[:FATHER*..]->(h)-[:FATHER]->() RETURN DISTINCT length(p)+1"));
+        largoLista = lista.size();
+        profundidad = 0;
+
+        i=0;
+        while (i < largoLista) {
+            temporal = Maper.getInt(lista.get(i));
+            if (temporal > profundidad) {
+                profundidad = temporal;
+            }
+            System.out.println("Temporal = " + temporal);
+            i++;
+        }
+        return profundidad;
     }
 }

@@ -15,6 +15,8 @@ import otrasclases.ParTerminos;
  */
 @Local
 public interface Neo4JLocal {
+    // Entrega la profundidad del arbol
+    int profundidad();
     
     // Método Lambda.
     // 0 en la misma jerarquia.
@@ -73,6 +75,5 @@ public interface Neo4JLocal {
     // Dado los ids de dos nodos, retorna true si el nodoUno es padre del nodoDos
     boolean esHijo(int idNodoUno, int idNodoDos);
 
-    // Dado el id de un nodo retorna el nivel de profundidad del nodo con respecto a la raiz.
-    int profundidad(int idNodo);
+
 }
