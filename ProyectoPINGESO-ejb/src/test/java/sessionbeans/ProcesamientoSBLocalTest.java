@@ -79,8 +79,8 @@ public class ProcesamientoSBLocalTest {
         List<String> genes = null;
         int opcion = 0;
         ProcesamientoSBLocal instance = new ProcesamientoSBLocalImpl();
-        float expResult = 0.0F;
-        float result = instance.CoreApp(genes, opcion);
+        String expResult = "";
+        String result = instance.CoreApp(genes, opcion,1);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -117,6 +117,11 @@ public class ProcesamientoSBLocalTest {
 
         public int invierteNumero(int numero) {
             return 0;
+        }
+
+        @Override
+        public String CoreApp(List<String> genes, int opcion, int cluster) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
 }
