@@ -35,9 +35,9 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
 
     @EJB
     private AnotacionesSBLocal anotacionesSB;
-    
+
     private int contador;
-    Neo4J db = new Neo4J("C:\\Users\\Kevin\\Documents\\Neo4j\\godbReal");
+    Neo4J db = new Neo4J("C:\\Users\\Kevin\\Documents\\Neo4j\\Sp3db2");
 
     public int getContador() {
         return contador;
@@ -84,7 +84,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
         int term1, term2;
         System.out.println("Cantidad Pares a consultar:" + largoListaPares);
         /*@param raiz = raiz del arbol*/
-        int raiz = 8150;
+        int raiz = 1;
         int D1 = 0, D2 = 0, D3 = 0, idACM = raiz;
         /*@param D = Profundidad*/
         int D = 5;
@@ -92,42 +92,61 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
             term1 = listaPares.get(k).getTermino1();
             term2 = listaPares.get(k).getTermino2();
             System.out.println("Par: " + (contador + 1) + "  Termino1: " + term1 + "  Termino2: " + term2);
-            idACM = db.ancestroComunMinimo(term1, term2);
-            System.out.println("ACM: " + idACM);
-            D1 = db.distancia(idACM, term1);
-            System.out.println("D1: " + D1);
-            D2 = db.distancia(idACM, term2);
-            System.out.println("D2: " + D2);
-            D3 = db.distancia(raiz, idACM);
-            System.out.println("D3: " + D3);
             if (opcion == 0) {
-
-                float tbk = tBKSB.calcularTBK(D1, D2, D3, 1);
+                float tbk=0;
+                idACM = db.ancestroComunMinimo(term1, term2);
+                System.out.println("ACM: " + idACM);
+                D3 = db.distancia(raiz, idACM);
+                System.out.println("D3: " + D3);
+                if(D3!=0){
+                    D1 = db.distancia(idACM, term1);
+                    System.out.println("D1: " + D1);
+                    D2 = db.distancia(idACM, term2);
+                    System.out.println("D2: " + D2);
+                    tbk = tBKSB.calcularTBK(D1, D2, D3, 1);
+                }
                 indiceTBK = indiceTBK + tbk;
                 System.out.println("TBK:  " + tbk);
                 contador++;
                 if (contador == largoListaPares) {
                     float indiceTbkFinal = (indiceTBK / largoListaGenes);
                     System.out.println("T.B.K. Final: " + indiceTbkFinal);
-                    String salida = Float.toString(indiceTbkFinal) + ", "+ cluster;
+                    String salida = Float.toString(indiceTbkFinal) + " , " + cluster;
                     return salida;
                 }
             }
             if (opcion == 1) {
-
-                float wp = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
+                idACM = db.ancestroComunMinimo(term1, term2);
+                System.out.println("ACM: " + idACM);
+                D3 = db.distancia(raiz, idACM);
+                System.out.println("D3: " + D3);
+                float wp = 0;
+                if(D3!=0){
+                    D1 = db.distancia(idACM, term1);
+                    System.out.println("D1: " + D1);
+                    D2 = db.distancia(idACM, term2);
+                    System.out.println("D2: " + D2);
+                    wp = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
+                }
                 indiceWuPalmer = indiceWuPalmer + wp;
                 System.out.println("Wu Palmer:  " + wp);
                 contador++;
                 if (contador == largoListaPares) {
                     float indiceWuPalmerFinal = (indiceWuPalmer / largoListaPares);
                     System.out.println("Wu Palmer Final: " + indiceWuPalmerFinal);
-                    String salida = Float.toString(indiceWuPalmerFinal) + ", "+ cluster;
+                    String salida = Float.toString(indiceWuPalmerFinal) + " , " + cluster;
                     return salida;
                 }
             }
             if (opcion == 2) {
-
+                idACM = db.ancestroComunMinimo(term1, term2);
+                System.out.println("ACM: " + idACM);
+                D1 = db.distancia(idACM, term1);
+                System.out.println("D1: " + D1);
+                D2 = db.distancia(idACM, term2);
+                System.out.println("D2: " + D2);
+                D3 = db.distancia(raiz, idACM);
+                System.out.println("D3: " + D3);
                 float lc = leacockChodorowSB.CalcularLeacockChodorow(D, D1, D2);
                 indiceLeacockChodorow = indiceLeacockChodorow + lc;
                 System.out.println("Leacock Chodorow:  " + lc);
@@ -135,7 +154,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 if (contador == largoListaPares) {
                     float indiceLCFinal = (indiceLeacockChodorow / largoListaGenes);
                     System.out.println("L.C. Final: " + indiceLCFinal);
-                    String salida = Float.toString(indiceLCFinal) + ", "+ cluster;
+                    String salida = Float.toString(indiceLCFinal) + " , " + cluster;
                     return salida;
                 }
             }

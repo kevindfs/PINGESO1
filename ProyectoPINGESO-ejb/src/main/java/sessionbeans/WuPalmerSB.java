@@ -13,7 +13,13 @@ public class WuPalmerSB implements WuPalmerSBLocal {
 
     @Override
     public float CalcularWuPalmer(int D1, int D2, int D3) {
-        float wp = (2*D3)/(float)((D1+D2)+(2*D3));
+        float wp=0;
+        if (D3==0){
+            return wp;
+        }
+        else{
+            wp = (2*D3)/(float)((D1+D2)+(2*D3));
+        }
         return wp;
     }
 

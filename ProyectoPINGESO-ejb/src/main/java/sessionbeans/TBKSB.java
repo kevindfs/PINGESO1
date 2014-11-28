@@ -19,6 +19,9 @@ public class TBKSB implements TBKSBLocal {
 
     @Override
     public float calcularTBK(int D1, int D2, int D3, int Lambda) {
+        if(D3==0){
+            return 0;
+        }
         float wp = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
         System.out.println("Wu Palmer: " + wp);
         System.out.println(D1+ "  "+D2 + "  "+D3);

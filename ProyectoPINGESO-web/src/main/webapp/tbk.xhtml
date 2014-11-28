@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>T.B.K.</title>
     </h:head>
     <h:body>
         <ui:composition template="./template2.xhtml">
@@ -39,6 +39,9 @@
                     <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                         <p:graphicImage value="Recursos/ajax-loader.gif" />
                     </p:dialog>
+                    <p:commandButton value="Download Results" ajax="false" >
+                        <p:fileDownload value="#{fileDownloadView.downloadFileTBK()}" />
+                    </p:commandButton>
                 </p:panel>
             </ui:define>
         </ui:composition>

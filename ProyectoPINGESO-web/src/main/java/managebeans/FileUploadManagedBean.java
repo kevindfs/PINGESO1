@@ -6,6 +6,7 @@
 package managebeans;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,7 +17,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import otrasclases.cluster;
 import sessionbeans.ProcesamientoSBLocal;
@@ -30,10 +34,10 @@ public class FileUploadManagedBean {
     private ProcesamientoSBLocal procesamientoSB;
 
     UploadedFile file;
-    public String output = "";
+    public String output;
     public boolean archivoCorrecto = false;
     private String[] selectedOption;
-
+   
     public String[] getSelectedOption() {
         return selectedOption;
     }
@@ -92,6 +96,7 @@ public class FileUploadManagedBean {
             BufferedReader br = new BufferedReader(new InputStreamReader(input));
             nombreGen = new ArrayList<>();
             clusterUnico = new ArrayList<>();
+            numeroCluster = new ArrayList<>();
             while ((line = br.readLine()) != null) {
                 String linea[] = line.split(",");
                 if (linea.length == 2) {
@@ -136,7 +141,6 @@ public class FileUploadManagedBean {
                 cluster clusterTemporal = new cluster(parseInt(clusterUnico.get(i)), genesPorCluster);
                 genesTotales.add(clusterTemporal);
             }
-
             for (int i = 0; i < clusterUnico.size(); i++) {
                 System.out.println("Cluster: " + genesTotales.get(i).getId());
                 for (int j = 0; j < genesTotales.get(i).getGenes().size(); j++) {
@@ -144,50 +148,69 @@ public class FileUploadManagedBean {
                 }
             }
         } catch (IOException ex) {
+            System.out.println("Error: " + ex);
         }
         return "=D";
     }
 
-    public void calcularIndiceTBK() {
+    public void calcularIndiceTBK() throws IOException {
+        output = "";
+        FileWriter fw = new FileWriter("F:\\TBK.txt");
+        fw.write("TBKIndice,Cluster");
+        
         if (genesTotales.isEmpty() | archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("First Upload Your File"));
-            System.out.println("Entré al if");
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
                 //System.out.println("Cluster: " + genesTotales.get(i).getId());
                 //Lista de genes,indiceCalcular,Cluster
-                String output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2, genesTotales.get(i).getId());
+                output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 0, genesTotales.get(i).getId());
+                fw.write(output);
             }
         }
+        fw.close();
     }
 
-    public void calcularIndiceWp() {
+    public void calcularIndiceWp() throws IOException {
+        output = "";
+        FileWriter fw = new FileWriter("F:\\WuPalmer.txt");
+        fw.write("WuPalmerIndice,Cluster");
+        fw.write(System.lineSeparator());
+        fw.write("****************************");
+        fw.write(System.lineSeparator());
         if (genesTotales.isEmpty() | archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe Cargar un archivo"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
                 //System.out.println("Cluster: " + genesTotales.get(i).getId());
                 //Lista de genes,indiceCalcular,Cluster
-                String output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2, genesTotales.get(i).getId());
-                
+                output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 1, genesTotales.get(i).getId());
+                fw.write(output);
+                fw.write(System.lineSeparator());
+                System.out.println(output);
             }
         }
+        fw.close();
     }
 
-    public void calcularIndiceLC() {
+    public void calcularIndiceLC() throws IOException {
+        output = "";
+        FileWriter fw = new FileWriter("F:\\LeacockChodorow.txt");
+        fw.write("LeacockChodorowIndice,Cluster");
+        fw.write(System.lineSeparator());
         if (genesTotales.isEmpty() || archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe Cargar un archivo"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
-                //System.out.println("Cluster: " + genesTotales.get(i).getId());
-                //Lista de genes,indiceCalcular,Cluster;
-                String output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2, genesTotales.get(i).getId());
-                
+                output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2, genesTotales.get(i).getId());
+                fw.write(output);
+                System.out.println(output);
             }
         }
+        fw.close();
     }
-
-    public void mostrarValores() {
+    //Método para el CheckBox que quedó a medias.
+    public void mostrarValores() throws IOException {
         System.out.println("Indices a calcular: ");
         for (int i = 0; i < selectedOption.length; i++) {
             if (selectedOption[i].equals("WP")) {
