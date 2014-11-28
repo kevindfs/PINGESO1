@@ -93,11 +93,6 @@ public class Neo4J implements Neo4JLocal {
     }
 
     @Override
-    public int profundidad(int idNodo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<String> consulta(String _query) {
         List<String> lista = new ArrayList<>();
         graphDataService = new GraphDatabaseFactory().newEmbeddedDatabase(dbPath);
@@ -328,5 +323,49 @@ public class Neo4J implements Neo4JLocal {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int lambda(int _accessionTerminoUno, int _accessionTerminoDos) {
+        int raiz = this.raiz(), numero, distanciaUno, distanciaDos;
+        
+        // Si el accession del término uno es igual al accession
+        // del término dos, misma jerarquía.
+        if (_accessionTerminoUno == _accessionTerminoDos) {
+            return 0;
+        }
+        
+        // Se obtienen las distancias desde la raiz a los términos.
+        distanciaUno = Maper.getInt(this.consulta("MATCH (a: Term {accession: " + _accessionTerminoUno + "}),(raiz: Term {accession: " + raiz +"}),p=(raiz)-[:FATHER*..]->(a) RETURN length(p) LIMIT 1").get(0));
+        distanciaDos = Maper.getInt(this.consulta("MATCH (b: Term {accession: " + _accessionTerminoDos + "}),(raiz: Term {accession: " + raiz +"}),p=(raiz)-[:FATHER*..]->(b) RETURN length(p) LIMIT 1").get(0));
+        
+        // Si las distancias son iguales, misma jerarquía.
+        if (distanciaUno == distanciaDos) {
+            return 0;
+        }
+        
+        // Si no es la misma jerarquía, entonces es la misma vecindad
+        return 1;
+    }
+
+    @Override
+    public int profundidad() {
+        int raiz = this.raiz(), i,largoLista, profundidad, temporal;
+        List<String> lista;
+        
+        lista = new ArrayList<>(this.consulta("MATCH (r: Term {accession: " + raiz + "}),(h: Term),p=(r)-[:FATHER*..]->(h)-[:FATHER]->() RETURN DISTINCT length(p)+1"));
+        largoLista = lista.size();
+        profundidad = 0;
+
+        i=0;
+        while (i < largoLista) {
+            temporal = Maper.getInt(lista.get(i));
+            if (temporal > profundidad) {
+                profundidad = temporal;
+            }
+            System.out.println("Temporal = " + temporal);
+            i++;
+        }
+        return profundidad;
     }
 }
