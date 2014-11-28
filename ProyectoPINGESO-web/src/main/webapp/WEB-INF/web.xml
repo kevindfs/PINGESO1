@@ -20,7 +20,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/wupalmer.xhtml</welcome-file>
+        <welcome-file>faces/home2.xhtml</welcome-file>
     </welcome-file-list>
     <context-param>  
         <param-name>primefaces.THEME</param-name>  
