@@ -111,7 +111,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 if (contador == largoListaPares) {
                     float indiceTbkFinal = (indiceTBK / largoListaGenes);
                     System.out.println("T.B.K. Final: " + indiceTbkFinal);
-                    String salida = Float.toString(indiceTbkFinal) + " , " + cluster;
+                    String salida = Float.toString(indiceTbkFinal) + "\t|\t" + cluster;
                     return salida;
                 }
             }
@@ -134,7 +134,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 if (contador == largoListaPares) {
                     float indiceWuPalmerFinal = (indiceWuPalmer / largoListaPares);
                     System.out.println("Wu Palmer Final: " + indiceWuPalmerFinal);
-                    String salida = Float.toString(indiceWuPalmerFinal) + " , " + cluster;
+                    String salida = Float.toString(indiceWuPalmerFinal) + "\t|\t" + cluster;
                     return salida;
                 }
             }
@@ -154,7 +154,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 if (contador == largoListaPares) {
                     float indiceLCFinal = (indiceLeacockChodorow / largoListaGenes);
                     System.out.println("L.C. Final: " + indiceLCFinal);
-                    String salida = Float.toString(indiceLCFinal) + " , " + cluster;
+                    String salida = Float.toString(indiceLCFinal) + "\t|\t" + cluster;
                     return salida;
                 }
             }

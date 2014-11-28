@@ -11,38 +11,85 @@
     <h:body>
         <ui:composition template="./template2.xhtml">
             <ui:define name="cuerpo">
-                <p:panel header="Calculate Leacock Chodorow">
-                    <p:growl id="msg" showDetail="true" />
-                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
-                        <p:fileUpload style="width: 500px" value="#{fileUploadManagedBean.file}" mode="advanced" 
-                                      fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" dragDropSupport="false"
-                                      update="msg" sizeLimit="10485760" 
-                                      fileLimit="10" allowTypes="/(\.|\/)(txt|csv)$/">
-                        </p:fileUpload> 
-                    </h:panelGrid>
-                    <p:commandButton value="Calculate Leacock Chodorow" actionListener="#{fileUploadManagedBean.calcularIndiceLC()}" icon="ui-icon-calculator" update="resultado"/>
-                    <br></br><br></br>
-                    <h:inputText id="resultado" value="#{fileUploadManagedBean.output}" />
-                    <br></br>
-                    <p:ajaxStatus style="display:block">
-                        <f:facet name="default">
-                            <h:outputText value="Status: StandBy" />
-                        </f:facet>
-                        <f:facet name="start">
-                            <h:outputText value="Status: Procesing..." />
-                        </f:facet>
-                        <f:facet name="complete">
-                            <h:outputText value="Status: Completed" />
-                        </f:facet>
-                    </p:ajaxStatus>
-                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                        <p:graphicImage value="Recursos/ajax-loader.gif" />
-                    </p:dialog>
-                    <p:commandButton value="Download Results" ajax="false" >
-                        <p:fileDownload value="#{fileDownloadView.downloadFileLC()}" />
-                    </p:commandButton>
-                </p:panel>
+                <div class="row">
+                    <br/>
+                    <div class="col-md-2"></div>
+                    <div class="col-lg-8 col-md-4 col-xs-0">
+                        <!--inicio-->
+                        <h2 style="text-align:center">Leacock-Chodorow's Calculator</h2>
+                        <hr/>
+
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            What is Leacock-Chodorow?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.El indice biológico wupalmer...
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            How To Use Leacock-Chodorow Calculator?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--fin-->
+                        <h:form>
+
+                            <p:panel header="Calculate Wu Palmer">
+                                <p:growl id="msg" showDetail="true" />
+                                <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                                    <p:fileUpload style="width: 500px" value="#{fileUploadManagedBean.file}" mode="advanced" 
+                                                  fileUploadListener="#{fileUploadManagedBean.fileUploadListener}" dragDropSupport="false"
+                                                  update="msg" sizeLimit="10485760" 
+                                                  fileLimit="10" allowTypes="/(\.|\/)(txt|csv)$/">
+                                    </p:fileUpload> 
+                                </h:panelGrid>
+                                <p:commandButton value="Calculate Wu Palmer" actionListener="#{fileUploadManagedBean.calcularIndiceTBK()}" icon="ui-icon-calculator" update="resultado"/>
+                                <br></br><br></br>
+                                <h:inputText id="resultado" value="#{fileUploadManagedBean.output}" />
+
+                                <br></br>
+                                <p:ajaxStatus style="display:block">
+                                    <f:facet name="default">
+                                        <h:outputText value="Status: StandBy" />
+                                    </f:facet>
+                                    <f:facet name="start">
+                                        <h:outputText value="Status: Procesing..." />
+                                    </f:facet>
+                                    <f:facet name="complete">
+                                        <h:outputText value="Status: Completed" />
+                                    </f:facet>
+                                </p:ajaxStatus>
+                                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                    <p:graphicImage value="Recursos/ajax-loader.gif" />
+                                </p:dialog>
+                                <p:commandButton value="Download Results" ajax="false" >
+                                    <p:fileDownload value="#{fileDownloadView.downloadFileLC()}" />
+                                </p:commandButton>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-xs-0">
+                    </div>    
+                </div>
             </ui:define>
         </ui:composition>
 

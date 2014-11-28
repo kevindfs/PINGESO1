@@ -37,7 +37,7 @@ public class FileUploadManagedBean {
     public String output;
     public boolean archivoCorrecto = false;
     private String[] selectedOption;
-   
+
     public String[] getSelectedOption() {
         return selectedOption;
     }
@@ -156,16 +156,21 @@ public class FileUploadManagedBean {
     public void calcularIndiceTBK() throws IOException {
         output = "";
         FileWriter fw = new FileWriter("F:\\TBK.txt");
-        fw.write("TBKIndice,Cluster");
-        
+        fw.write("TBKIndice\t|\tCluster");
+        fw.write(System.lineSeparator());
+        fw.write("----------------------------");
+        fw.write(System.lineSeparator());
+        double timeStart, timeStop;
         if (genesTotales.isEmpty() | archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("First Upload Your File"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
-                //System.out.println("Cluster: " + genesTotales.get(i).getId());
-                //Lista de genes,indiceCalcular,Cluster
+                timeStart = System.currentTimeMillis();
                 output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 0, genesTotales.get(i).getId());
                 fw.write(output);
+                timeStop = System.currentTimeMillis();
+                double tiempoSegundos = (timeStop - timeStart) * 0.001;
+                System.out.println("Tiempo iteración: " + tiempoSegundos + " segundos");
             }
         }
         fw.close();
@@ -173,21 +178,24 @@ public class FileUploadManagedBean {
 
     public void calcularIndiceWp() throws IOException {
         output = "";
+        double timeStart, timeStop;
         FileWriter fw = new FileWriter("F:\\WuPalmer.txt");
-        fw.write("WuPalmerIndice,Cluster");
+        fw.write("WuPalmerIndice\t|\tCluster");
         fw.write(System.lineSeparator());
-        fw.write("****************************");
+        fw.write("----------------------------");
         fw.write(System.lineSeparator());
         if (genesTotales.isEmpty() | archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe Cargar un archivo"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
-                //System.out.println("Cluster: " + genesTotales.get(i).getId());
-                //Lista de genes,indiceCalcular,Cluster
+                timeStart = System.currentTimeMillis();
                 output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 1, genesTotales.get(i).getId());
                 fw.write(output);
                 fw.write(System.lineSeparator());
                 System.out.println(output);
+                timeStop = System.currentTimeMillis();
+                double tiempoSegundos = (timeStop - timeStart) * 0.001;
+                System.out.println("Tiempo Iteración: " + tiempoSegundos + " segundos");
             }
         }
         fw.close();
@@ -195,21 +203,30 @@ public class FileUploadManagedBean {
 
     public void calcularIndiceLC() throws IOException {
         output = "";
+        double timeStart, timeStop;
         FileWriter fw = new FileWriter("F:\\LeacockChodorow.txt");
-        fw.write("LeacockChodorowIndice,Cluster");
+        fw.write("LeacockChodorowIndice\t|\tCluster");
+        fw.write(System.lineSeparator());
+        fw.write("----------------------------");
         fw.write(System.lineSeparator());
         if (genesTotales.isEmpty() || archivoCorrecto == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe Cargar un archivo"));
         } else {
             for (int i = 0; i < clusterUnico.size(); i++) {
+                timeStart = System.currentTimeMillis();
                 output = procesamientoSB.CoreApp(genesTotales.get(i).getGenes(), 2, genesTotales.get(i).getId());
                 fw.write(output);
                 System.out.println(output);
+                timeStop = System.currentTimeMillis();
+                double tiempoSegundos = (timeStop - timeStart) * 0.001;
+                System.out.println("Tiempo iteración: " + tiempoSegundos + " segundos");
             }
         }
         fw.close();
     }
+
     //Método para el CheckBox que quedó a medias.
+
     public void mostrarValores() throws IOException {
         System.out.println("Indices a calcular: ");
         for (int i = 0; i < selectedOption.length; i++) {
