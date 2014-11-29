@@ -62,9 +62,6 @@ public class NeoServer {
                     rs = stmt.executeQuery(query);
                     rs.next();
                     lista.get(i).setAncestroComunMinimo(Integer.parseInt(rs.getString("c.accession")));
-//                    while(rs.next()) {
-//                        System.out.println(Integer.parseInt(rs.getString("raiz.accession")));
-//                    }
                 }
                 i++;
             }
@@ -75,5 +72,60 @@ public class NeoServer {
         return lista;
     }
     
+    public List<ParTerminos> distancias(List<ParTerminos> lista) throws Exception{
+        int raiz = this.raiz(), i, largoLista = lista.size(), term1, term2, acm, d1, d2, d3;
+        String query;
 
+        Class.forName("org.neo4j.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:neo4j://localhost:7474/");
+        
+        try(Statement stmt = con.createStatement()) {
+            ResultSet rs;
+            i=0;
+            while (i < largoLista) {
+                term1 = lista.get(i).getTermino1();
+                term2 = lista.get(i).getTermino2();
+                acm = lista.get(i).getAncestroComunMinimo();
+                // CALCULAR D1.
+                if (acm == term1) {
+                    lista.get(i).setD1(0);
+                }
+                
+                else {
+                    query = "MATCH (a: Term {accession: " + acm + "}),(b: Term {accession: " + term1 + "}),p=a-[r:FATHER*..]->b RETURN length(p) LIMIT 1";
+                    rs = stmt.executeQuery(query);
+                    rs.next();
+                    lista.get(i).setD1(Integer.parseInt(rs.getString("length(p)")));
+                }
+                
+                // CALCULAR D2
+                if (acm == term2) {
+                    lista.get(i).setD2(0);
+                }
+                
+                else {
+                    query = "MATCH (a: Term {accession: " + acm + "}),(b: Term {accession: " + term2 + "}),p=a-[r:FATHER*..]->b RETURN length(p) LIMIT 1";
+                    rs = stmt.executeQuery(query);
+                    rs.next();
+                    lista.get(i).setD2(Integer.parseInt(rs.getString("length(p)")));
+                }
+
+                // CALCULAR D3
+                if (raiz == acm) {
+                    lista.get(i).setD3(0);
+                }
+                
+                else {
+                    query = "MATCH (a: Term {accession: " + raiz + "}),(b: Term {accession: " + acm + "}),p=a-[r:FATHER*..]->b RETURN length(p) LIMIT 1";
+                    rs = stmt.executeQuery(query);
+                    rs.next();
+                    lista.get(i).setD3(Integer.parseInt(rs.getString("length(p)")));
+                }
+                
+                i++;
+            }
+        }
+
+        return lista;
+    }
 }
