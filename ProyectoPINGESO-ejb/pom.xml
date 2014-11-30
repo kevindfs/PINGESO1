@@ -50,32 +50,6 @@
             <artifactId>spring-data-neo4j</artifactId>
             <version>3.2.0.RELEASE</version>
         </dependency>
-        
-        <!-- INICIO DEPENDENCIA 1 -->
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-jdbc</artifactId>
-            <version>2.0.2</version>
-        </dependency>
-        <!-- FIN DEPENDENCIA 1 -->
-        
-        <!-- INICIO DEPENDENCIA 2. For file and in-memory support, add these two as well -->
-        <dependency>
-          <groupId>org.neo4j</groupId>
-          <artifactId>neo4j</artifactId>
-          <version>2.0.3</version>
-        </dependency>
-        <!-- FIN DEPENDENCIA 2 -->
-    
-        <!-- INICIO DEPENDENCIA 3 -->
-        <dependency>
-          <groupId>org.neo4j</groupId>
-          <artifactId>neo4j-kernel</artifactId>
-          <version>2.0.3</version>
-          <type>test-jar</type>
-        </dependency>
-        <!-- INICIO DEPENDENCIA 3 -->
-        
     </dependencies>
 
     <build>
@@ -127,17 +101,4 @@
             </plugin>
         </plugins>
     </build>
-    
-    <!-- INICIO DEPENDENCIA 4 -->
-    <repositories>
-        <repository>
-          <id>neo4j-public</id>
-          <url>http://m2.neo4j.org/content/groups/public</url>
-          <releases>
-            <enabled>true</enabled>
-            <checksumPolicy>warn</checksumPolicy>
-          </releases>
-        </repository>
-    </repositories>
-    <!-- FIN DEPENDENCIA 4 -->
 </project>
