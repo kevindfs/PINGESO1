@@ -68,7 +68,7 @@ public class mbIndices {
     public mbIndices() {
     }
 
-    public void opciones(String option) {
+    public void opciones(String option) throws Exception{
         System.out.println("Llamé al mbIndices ");
         double timeStart, timeStop;
         timeStart = System.currentTimeMillis();

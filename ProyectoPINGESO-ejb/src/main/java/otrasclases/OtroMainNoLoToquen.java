@@ -5,11 +5,13 @@
  */
 package otrasclases;
 
-/**
- *
- * @author alonso
- */
+
 public class OtroMainNoLoToquen {
-    public static void main(String args[]) {
+    
+    public static int main() throws Exception{
+        NeoServer ns = new NeoServer();
+        System.out.println("Raiz:" + ns.raiz());
+        return ns.raiz();
     }
+    
 }

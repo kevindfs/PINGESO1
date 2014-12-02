@@ -153,7 +153,7 @@ public class FileUploadManagedBean {
         return "=D";
     }
 
-    public void calcularIndiceTBK() throws IOException {
+    public void calcularIndiceTBK() throws IOException, Exception {
         output = "";
         FileWriter fw = new FileWriter("F:\\TBK.txt");
         fw.write("TBKIndice\t|\tCluster");
@@ -176,7 +176,7 @@ public class FileUploadManagedBean {
         fw.close();
     }
 
-    public void calcularIndiceWp() throws IOException {
+    public void calcularIndiceWp() throws IOException,Exception {
         output = "";
         double timeStart, timeStop;
         FileWriter fw = new FileWriter("F:\\WuPalmer.txt");
@@ -201,7 +201,7 @@ public class FileUploadManagedBean {
         fw.close();
     }
 
-    public void calcularIndiceLC() throws IOException {
+    public void calcularIndiceLC() throws IOException, Exception {
         output = "";
         double timeStart, timeStop;
         FileWriter fw = new FileWriter("F:\\LeacockChodorow.txt");
@@ -227,7 +227,7 @@ public class FileUploadManagedBean {
 
     //Método para el CheckBox que quedó a medias.
 
-    public void mostrarValores() throws IOException {
+    public void mostrarValores() throws IOException, Exception {
         System.out.println("Indices a calcular: ");
         for (int i = 0; i < selectedOption.length; i++) {
             if (selectedOption[i].equals("WP")) {

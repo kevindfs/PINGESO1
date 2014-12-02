@@ -19,7 +19,7 @@ public interface ProcesamientoSBLocal {
     
     List<ParTerminos> combinaTerminos(List<Integer> lista1, List<Integer> lista2);
     
-    String CoreApp(List<String> genes, int opcion, int cluster);
+    String CoreApp(List<String> genes, int opcion, int cluster) throws Exception;
 
     int invierteNumero(int numero);
     

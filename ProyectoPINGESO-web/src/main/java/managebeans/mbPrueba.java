@@ -46,10 +46,12 @@ public class mbPrueba {
         genes.clear();
         genes.add("gen1");genes.add("gen2");genes.add("gen3");
         String salida;
-        salida = procesamientoSB.CoreApp(genes, 1,1);
+        //salida = procesamientoSB.CoreApp(genes, 1,1,);
         
   }
     public mbPrueba() {
     }
-    
+    public void mb () throws Exception{
+        otrasclases.OtroMainNoLoToquen.main();
+    }
 }

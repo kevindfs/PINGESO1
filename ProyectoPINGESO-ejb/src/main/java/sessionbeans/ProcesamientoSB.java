@@ -13,6 +13,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import otrasclases.ParTerminos;
 import javax.xml.registry.Query;
+import otrasclases.NeoServer;
+import otrasclases.OtroMainNoLoToquen;
 
 /**
  *
@@ -20,7 +22,8 @@ import javax.xml.registry.Query;
  */
 @Stateless
 public class ProcesamientoSB implements ProcesamientoSBLocal {
-
+    
+        
     @EJB
     private LeacockChodorowSBLocal leacockChodorowSB;
 
@@ -30,14 +33,15 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
     @EJB
     private WuPalmerSBLocal wuPalmerSB;
 
-    @EJB
-    private Neo4JLocal neo4J;
+    //@EJB
+    //private Neo4JLocal neo4J;
 
     @EJB
-    private AnotacionesSBLocal anotacionesSB;
-
+    private AnotacionesSBLocal anotacionesSB;  
+    
     private int contador;
-    Neo4J db = new Neo4J("C:\\Users\\Kevin\\Documents\\Neo4j\\Sp3db2");
+    
+    //Neo4J db = new Neo4J("C:\\Users\\Kevin\\Documents\\Neo4j\\Sp3db2");
 
     public int getContador() {
         return contador;
@@ -46,12 +50,13 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
     public void setContador(int contador) {
         this.contador = contador;
     }
-
+        
     @Override
-    public String CoreApp(List<String> genes, int opcion, int cluster) {
+    public String CoreApp(List<String> genes, int opcion, int cluster) throws Exception{
         //opcion == 0 => TBK
         //opcion == 1 => WuPalmer
         //opcion == 2 => Leacock-Chodorow
+        NeoServer neo = new NeoServer();
         float indiceWuPalmer = 0;
         float indiceTBK = 0;
         float indiceLeacockChodorow = 0;
@@ -80,34 +85,47 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
             }
             i++;
         }
+
+        System.out.println("0");
+        int raiz = neo.raiz();
+        System.out.println("1");
+        
+        
+        listaPares = new ArrayList<>(neo.ancestrosComunesMinimos(listaPares));
+        System.out.println("2");
+        listaPares = new ArrayList<>(neo.distancias(listaPares));
+        System.out.println("3");
         int largoListaPares = listaPares.size();
         int term1, term2;
         System.out.println("Cantidad Pares a consultar:" + largoListaPares);
-        /*@param raiz = raiz del arbol*/
-        int raiz = 1;
-        int D1 = 0, D2 = 0, D3 = 0, idACM = raiz;
-        /*@param D = Profundidad*/
-        int D = 5;
+        //@param raiz = raiz del arbol
+        
+        //@param D = Profundidad
+        int D = neo.niveles();
+        int D1,D2,D3,lambda=0;
+        float f;
         for (int k = 0; k < largoListaPares; k++) {
             term1 = listaPares.get(k).getTermino1();
             term2 = listaPares.get(k).getTermino2();
+            D1 = listaPares.get(k).getD1();
+            D2 = listaPares.get(k).getD2();
+            D3 = listaPares.get(k).getD3();
             System.out.println("Par: " + (contador + 1) + "  Termino1: " + term1 + "  Termino2: " + term2);
             if (opcion == 0) {
-                float tbk=0;
-                idACM = db.ancestroComunMinimo(term1, term2);
-                System.out.println("ACM: " + idACM);
-                D3 = db.distancia(raiz, idACM);
-                System.out.println("D3: " + D3);
-                if(D3!=0){
-                    D1 = db.distancia(idACM, term1);
-                    System.out.println("D1: " + D1);
-                    D2 = db.distancia(idACM, term2);
-                    System.out.println("D2: " + D2);
-                    tbk = tBKSB.calcularTBK(D1, D2, D3, 1);
+                if(neo.esAncestro(term1, term2)){
+                    f=1;
+                    float tbk = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
+                    indiceTBK = indiceTBK + tbk;
+                    System.out.println("TBK:  " + tbk);
+                    contador++;
                 }
-                indiceTBK = indiceTBK + tbk;
-                System.out.println("TBK:  " + tbk);
-                contador++;
+                else{
+                    lambda = neo.lambda(term1, term2);
+                    float tbk = tBKSB.calcularTBK(D1, D2, D3, lambda);
+                    indiceTBK = indiceTBK + tbk;
+                    System.out.println("TBK:  " + tbk);
+                    contador++;
+                }
                 if (contador == largoListaPares) {
                     float indiceTbkFinal = (indiceTBK / largoListaGenes);
                     System.out.println("T.B.K. Final: " + indiceTbkFinal);
@@ -116,18 +134,7 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 }
             }
             if (opcion == 1) {
-                idACM = db.ancestroComunMinimo(term1, term2);
-                System.out.println("ACM: " + idACM);
-                D3 = db.distancia(raiz, idACM);
-                System.out.println("D3: " + D3);
-                float wp = 0;
-                if(D3!=0){
-                    D1 = db.distancia(idACM, term1);
-                    System.out.println("D1: " + D1);
-                    D2 = db.distancia(idACM, term2);
-                    System.out.println("D2: " + D2);
-                    wp = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
-                }
+                float wp = wuPalmerSB.CalcularWuPalmer(D1, D2, D3);
                 indiceWuPalmer = indiceWuPalmer + wp;
                 System.out.println("Wu Palmer:  " + wp);
                 contador++;
@@ -139,14 +146,6 @@ public class ProcesamientoSB implements ProcesamientoSBLocal {
                 }
             }
             if (opcion == 2) {
-                idACM = db.ancestroComunMinimo(term1, term2);
-                System.out.println("ACM: " + idACM);
-                D1 = db.distancia(idACM, term1);
-                System.out.println("D1: " + D1);
-                D2 = db.distancia(idACM, term2);
-                System.out.println("D2: " + D2);
-                D3 = db.distancia(raiz, idACM);
-                System.out.println("D3: " + D3);
                 float lc = leacockChodorowSB.CalcularLeacockChodorow(D, D1, D2);
                 indiceLeacockChodorow = indiceLeacockChodorow + lc;
                 System.out.println("Leacock Chodorow:  " + lc);
